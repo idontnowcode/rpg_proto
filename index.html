@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>RPG Proto</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ══ Side Panel Backdrop ══════════════════════════════════ -->
+  <div id="panel-backdrop" onclick="closePanels()" style="display:none"></div>
+
+  <!-- ══ Left: Character Stat Panel ═══════════════════════════ -->
+  <div id="side-stat" class="side-panel">
+    <div class="side-tab left-tab" onclick="togglePanel('stat')">스<br>탯</div>
+    <div class="side-content">
+      <div class="side-header">
+        <span>🧑 캐릭터 정보</span>
+        <button onclick="closePanels()">✕</button>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-label">레벨</span>
+        <span id="cs-level" class="stat-val lv-val">Lv. 1</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">HP</span>
+        <span id="cs-hp" class="stat-val hp-val">40 / 40</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">ATK</span>
+        <span id="cs-atk" class="stat-val atk-val">10</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">DEF</span>
+        <span id="cs-def" class="stat-val def-val">5</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">SPD</span>
+        <span id="cs-spd" class="stat-val spd-val">5</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">EXP</span>
+        <span id="cs-exp" class="stat-val exp-val">0 / 30</span>
+      </div>
+
+      <!-- Stat allocation: shown only when SP > 0 -->
+      <div id="stat-alloc-section" style="display:none">
+        <div class="alloc-header">스탯 포인트: <strong id="sp-remaining">0</strong></div>
+        <div class="alloc-grid">
+          <button class="alloc-btn" onclick="allocateStat('hp')">HP +4</button>
+          <button class="alloc-btn" onclick="allocateStat('atk')">ATK +1</button>
+          <button class="alloc-btn" onclick="allocateStat('def')">DEF +1</button>
+          <button class="alloc-btn" onclick="allocateStat('spd')">SPD +1</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Right: Pet List Panel ════════════════════════════════ -->
+  <div id="side-pet" class="side-panel">
+    <div class="side-tab right-tab" onclick="togglePanel('pet')">페<br>트</div>
+    <div class="side-content">
+      <div class="side-header">
+        <button onclick="closePanels()">✕</button>
+        <span id="pet-panel-title">페트 목록 (1/10)</span>
+      </div>
+      <div id="pet-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ Login Scene ══════════════════════════════════════════ -->
+  <div id="scene-login" class="scene active">
+    <h1>🐾 RPG Proto</h1>
+    <p class="login-sub">계정을 선택하거나 새 이름을 입력하세요</p>
+    <div class="login-box">
+      <input id="login-username" type="text" placeholder="이름 입력..." maxlength="16" autocomplete="off">
+      <button class="login-btn" onclick="onLogin()">▶ 시작</button>
+    </div>
+    <div id="save-slots"></div>
+  </div>
+
+  <!-- ══ Title Scene ═══════════════════════════════════════════ -->
+  <div id="scene-title" class="scene">
+    <h1>🐾 RPG Proto</h1>
+    <p>함께할 페트를 선택하세요</p>
+    <div class="pet-select">
+      <button class="pet-btn" onclick="selectPet(94)">🔥 이그니스<br><small>ATK 특화형</small></button>
+      <button class="pet-btn" onclick="selectPet(12)">💧 아쿠론<br><small>HP / DEF 형</small></button>
+      <button class="pet-btn" onclick="selectPet(7)">⚡ 볼팡<br><small>SPD 특화형</small></button>
+    </div>
+  </div>
+
+  <!-- ══ Map Scene ════════════════════════════════════════════ -->
+  <div id="scene-map" class="scene">
+
+    <!-- HUD (compact 2-row) -->
+    <div id="hud">
+      <div class="hud-row">
+        <span id="hud-player-name">🧑 캐릭터 Lv.1</span>
+        <span id="hud-player-hp"  class="hud-hp" >HP 40/40</span>
+        <span id="hud-player-atk" class="hud-atk">ATK 10</span>
+        <span id="hud-player-def" class="hud-def">DEF 5</span>
+        <span id="hud-player-spd" class="hud-spd">SPD 5</span>
+        <span id="hud-player-exp" class="hud-exp">EXP 0/30</span>
+        <button id="hud-sp" onclick="togglePanel('stat')">SP: 0</button>
+      </div>
+      <div class="hud-row">
+        <span id="hud-name">🐾 - Lv.1</span>
+        <span id="hud-hp"  class="hud-hp" >HP -</span>
+        <span id="hud-atk" class="hud-atk">ATK -</span>
+        <span id="hud-def" class="hud-def">DEF -</span>
+        <span id="hud-spd" class="hud-spd">SPD -</span>
+        <span id="hud-exp" class="hud-exp">EXP 0/0</span>
+      </div>
+      <div class="hud-row hud-status">
+        <span id="hud-gold">💰 0G</span>
+        <button onclick="togglePanel('pet')">📦 <span id="hud-pet-count">1/10</span></button>
+        <button onclick="toggleCompendium()">📖 도감</button>
+        <button onclick="toggleDevPanel()" class="dev-btn">🔧 DEV</button>
+      </div>
+    </div>
+
+    <!-- Map Area -->
+    <div id="map-area">
+      <div id="map-header">
+        <span id="map-name">-</span>
+        <span class="map-hint">WASD / 방향키 이동 | 🌀 포털로 맵 이동</span>
+      </div>
+      <div id="map-grid"></div>
+      <div id="map-log"></div>
+    </div>
+
+    <!-- Dev Panel -->
+    <div id="dev-panel" style="display:none">
+      <span class="dev-label">🔧 DEV 맵 이동</span>
+      <button onclick="devGoto('town')">🏘️ 마을</button>
+      <button onclick="devGoto('dungeon')">⚔️ 던전</button>
+      <button onclick="devGoto('forest')">🌲 숲</button>
+      <button onclick="devGoto('cave')">🕳️ 동굴</button>
+      <button onclick="devGoto('darkCastle')">🏰 암흑성</button>
+    </div>
+
+    <!-- D-Pad -->
+    <div id="dpad">
+      <button class="dpad-btn" onclick="tryMove(-1,0)">▲</button>
+      <div class="dpad-row">
+        <button class="dpad-btn" onclick="tryMove(0,-1)">◀</button>
+        <div class="dpad-btn dpad-center">●</div>
+        <button class="dpad-btn" onclick="tryMove(0,1)">▶</button>
+      </div>
+      <button class="dpad-btn" onclick="tryMove(1,0)">▼</button>
+    </div>
+  </div>
+
+  <!-- ══ Battle Scene ══════════════════════════════════════════ -->
+
+  <div id="scene-battle" class="scene">
+
+    <!-- Pixel art battle background -->
+    <canvas id="battle-canvas" width="480" height="200" style="width:100%;image-rendering:pixelated;display:block;max-height:200px;"></canvas>
+
+    <!-- Enemy cards: dynamically rendered, click to select target -->
+    <div id="battle-enemies"></div>
+
+    <div class="vs-divider">⚔ VS ⚔</div>
+
+    <!-- Ally: player + party (rendered dynamically by renderBattle) -->
+    <div id="battle-allies"></div>
+
+    <!-- Battle Log -->
+    <div id="battle-log"></div>
+
+    <!-- Action Buttons -->
+    <div id="battle-actions">
+      <button class="action-btn" onclick="onAttack()">⚔️ 공격</button>
+      <button class="action-btn" id="btn-capture" onclick="onCapture()">🎯 포획</button>
+      <button class="action-btn" onclick="onRun()">🏃 도망</button>
+    </div>
+  </div>
+
+  <!-- ══ Compendium Overlay ════════════════════════════════════ -->
+  <div id="compendium-overlay" style="display:none">
+    <div id="compendium-panel">
+      <div class="comp-header">
+        <span>📖 페트 도감</span>
+        <button onclick="toggleCompendium()">✕</button>
+      </div>
+      <div class="comp-tabs">
+        <button class="comp-tab active" id="tab-starter" onclick="switchCompTab('starter')">초기 선택</button>
+        <button class="comp-tab" id="tab-wild" onclick="switchCompTab('wild')">야생 페트</button>
+      </div>
+      <div id="comp-content"></div>
+    </div>
+  </div>
+
+  <!-- ══ Scripts ════════════════════════════════════════════════ -->
+  <script src="js/systems/utils.js"></script>
+  <script src="js/data/petMasterData.js"></script>
+  <script src="js/data/monsterData.js"></script>
+  <script src="js/data/mapData.js"></script>
+  <script src="js/systems/petGrowthSystem.js"></script>
+  <script src="js/systems/petFactory.js"></script>
+  <script src="js/systems/combatSystem.js"></script>
+  <script src="js/systems/playerSystem.js"></script>
+  <script src="js/systems/battleCanvas.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

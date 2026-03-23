@@ -1,0 +1,9 @@
+# bkit / claude dev files
+.bkit/
+.claude/
+docs/
+references/
+
+# OS
+.DS_Store
+Thumbs.db
