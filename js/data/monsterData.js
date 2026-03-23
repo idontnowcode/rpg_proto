@@ -22,20 +22,23 @@ function getScaledMonster(mapId) {
   const id    = map.encounters[randInt(0, map.encounters.length - 1)];
   const base  = MONSTERS[id];
   const level = randInt(map.levelRange[0], map.levelRange[1]);
-  const scale = 1 + (level - 1) * 0.15;
-  // Lv.1 = base stats (100%), Lv.2+ = 70~80% of scaled (wild penalty)
-  const wildPenalty = level === 1 ? 1.0 : (0.70 + Math.random() * 0.10);
+  // Normal per-level growth: +15% per level
+  // Wild per-level growth: +10~12% per level (70~80% of normal growth rate)
+  // Result: Lv.1 wild == Lv.1 normal; Lv.2+ normal > Lv.2+ wild > Lv.1
+  const wildGrowthRate = 0.105 + Math.random() * 0.015; // ~70~80% of 0.15
+  const wildScale = 1 + (level - 1) * wildGrowthRate;
+  const normalScale = 1 + (level - 1) * 0.15;
 
   const capturable = level === 1 && !!base.petId;
   return {
     ...base,
-    hp:        Math.max(1, Math.floor(base.hp  * scale * wildPenalty)),
-    atk:       Math.max(1, Math.floor(base.atk * scale * wildPenalty)),
-    def:       Math.max(0, Math.floor(base.def * scale * wildPenalty)),
-    spd:       Math.max(1, Math.floor(base.spd * scale * wildPenalty)),
-    exp:       Math.floor(base.exp * scale),
+    hp:        Math.max(1, Math.floor(base.hp  * wildScale)),
+    atk:       Math.max(1, Math.floor(base.atk * wildScale)),
+    def:       Math.max(0, Math.floor(base.def * wildScale)),
+    spd:       Math.max(1, Math.floor(base.spd * wildScale)),
+    exp:       Math.floor(base.exp * normalScale),
     level,
-    currentHp: Math.max(1, Math.floor(base.hp * scale * wildPenalty)),
+    currentHp: Math.max(1, Math.floor(base.hp * wildScale)),
     capturable,
     petId: capturable ? base.petId : undefined,
   };
