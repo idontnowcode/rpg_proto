@@ -1,28 +1,23 @@
-function getRankBonus(sum) {
-  if (sum >= 100) return [450, 500];
-  if (sum >= 95)  return [470, 520];
-  if (sum >= 90)  return [490, 540];
-  if (sum >= 85)  return [510, 560];
-  if (sum >= 80)  return [530, 580];
-  return [550, 600];
-}
-
+// 레벨업: growStats 기반 직접 성장
+// 각 스탯은 center ± (var × 랜덤) 만큼 증가
+// UI 스탯 목표값 (getUIStats 변환 후):
+//   ATK + DEF + SPD 합계 평균 4.6~5.4, 범위 4~7
+//   HP: 페트 타입별 center ±1 수준
 function levelUp(pet) {
-  const add = distributePoints();
-  const sum = pet.master.hpCoeff + pet.master.atkCoeff
-            + pet.master.defCoeff + pet.master.spdCoeff;
-  const [bMin, bMax] = getRankBonus(sum);
-  const B = randInt(bMin, bMax);
-  // growFactor: baseline 4.5. higher = faster growth per level
-  const growMult = (pet.master.growFactor || 4.5) / 4.5;
+  const g = pet.master.growStats;
+  if (!g) return {};
 
-  pet.hp  += (pet.baseHp  + add[0]) * B * growMult / 10000;
-  pet.atk += (pet.baseAtk + add[1]) * B * growMult / 10000;
-  pet.def += (pet.baseDef + add[2]) * B * growMult / 10000;
-  pet.spd += (pet.baseSpd + add[3]) * B * growMult / 10000;
+  const v = g.var || 0.5;
+  const r = () => (Math.random() * 2 - 1) * v;
+
+  // HP 내부 계수는 UI에서 ×4 증폭되므로 분산을 0.25배로 제한
+  pet.hp  += Math.max(0.05, g.hp  + r() * 0.25);
+  pet.atk += Math.max(0.05, g.atk + r());
+  pet.def += Math.max(0,    g.def + r());
+  pet.spd += Math.max(0.05, g.spd + r());
   pet.level++;
 
-  return { add, B };
+  return {};
 }
 
 // 내부 계수 → 실제 표시 스탯
