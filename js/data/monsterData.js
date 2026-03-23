@@ -1,9 +1,9 @@
 // ── Wild Pet Base Stats (Lv1 기준) ─────────────────────────────────────────────
 // 모든 전투 상대를 '페트'로 통칭
 const MONSTERS = {
-  rat:        { id:'rat',        name:'크리퍼',      emoji:'🐀', hp:14,  atk:5,  def:1,  spd:10, exp:8   },
-  slime:      { id:'slime',      name:'글로비',      emoji:'🟢', hp:28,  atk:8,  def:3,  spd:4,  exp:15  },
-  bat:        { id:'bat',        name:'쉐이드',      emoji:'🦇', hp:20,  atk:12, def:2,  spd:12, exp:18  },
+  rat:        { id:'rat',        name:'크리퍼',      emoji:'🐀', hp:14,  atk:5,  def:1,  spd:10, exp:8,   petId:101 },
+  slime:      { id:'slime',      name:'글로비',      emoji:'🟢', hp:28,  atk:8,  def:3,  spd:4,  exp:15,  petId:201 },
+  bat:        { id:'bat',        name:'쉐이드',      emoji:'🦇', hp:20,  atk:12, def:2,  spd:12, exp:18,  petId:102 },
   fairy:      { id:'fairy',      name:'네카',        emoji:'🧚', hp:18,  atk:14, def:1,  spd:16, exp:22  },
   goblin:     { id:'goblin',     name:'그리블',      emoji:'👺', hp:45,  atk:15, def:6,  spd:8,  exp:35  },
   skeleton:   { id:'skeleton',   name:'오소렉',      emoji:'💀', hp:55,  atk:18, def:10, spd:6,  exp:45  },
@@ -25,6 +25,7 @@ function getScaledMonster(mapId) {
   const scale = 1 + (level - 1) * 0.15;
   const weak  = 0.70 + Math.random() * 0.10;
 
+  const capturable = level === 1 && !!base.petId;
   return {
     ...base,
     hp:        Math.max(1, Math.floor(base.hp  * scale * weak)),
@@ -34,7 +35,8 @@ function getScaledMonster(mapId) {
     exp:       Math.floor(base.exp * scale),
     level,
     currentHp: Math.max(1, Math.floor(base.hp * scale * weak)),
-    capturable: false,
+    capturable,
+    petId: capturable ? base.petId : undefined,
   };
 }
 

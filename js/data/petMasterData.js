@@ -25,7 +25,25 @@ const PET_MASTER = {
     desc: '번개를 달리는 전설의 늑대. 압도적인 속도를 지닌다.',
   },
 
-  // ── 포획 전용 페트 ─────────────────────────────────────────────────────────
+  // ── 야생 포획 (일반 조우) ──────────────────────────────────────────────────
+  101: {
+    petId: 101,
+    name: '크리퍼', emoji: '🐀', type: 'SPD형',
+    rarity: '일반', habitat: '초보 던전',
+    initStatCoeff: 18, growFactor: 3.5,
+    hpCoeff: 15, atkCoeff: 22, defCoeff: 10, spdCoeff: 28,
+    desc: '어둠 속을 빠르게 누비는 소형 마물. 속도가 빠르다.',
+  },
+  102: {
+    petId: 102,
+    name: '쉐이드', emoji: '🦇', type: 'SPD/ATK',
+    rarity: '일반', habitat: '초보 던전',
+    initStatCoeff: 20, growFactor: 3.8,
+    hpCoeff: 16, atkCoeff: 26, defCoeff: 12, spdCoeff: 26,
+    desc: '어둠 속을 소리 없이 나는 박쥐형 마물. 공격과 속도 모두 준수하다.',
+  },
+
+  // ── 포획 전용 페트 (capturePool) ──────────────────────────────────────────
   201: {
     petId: 201,
     name: '글로비', emoji: '🟢', type: '균형형',
@@ -71,9 +89,9 @@ const PET_MASTER = {
 // ── 페트 도감 데이터 ──────────────────────────────────────────────────────────
 // petId 있는 종류 = capturePool 통해 Lv.1로 출현 시 포획 가능
 const COMPENDIUM_WILD = [
-  { id:'rat',        name:'크리퍼',      emoji:'🐀', rarity:'일반', habitat:'초보 던전',   desc:'던전의 어둠 속을 빠르게 누비는 소형 마물.' },
+  { id:'rat',        name:'크리퍼',      emoji:'🐀', rarity:'일반', habitat:'초보 던전',   petId:101, desc:'던전의 어둠 속을 빠르게 누비는 소형 마물. Lv.1 출현 시 포획 가능.' },
   { id:'slime',      name:'글로비',      emoji:'🟢', rarity:'일반', habitat:'초보 던전',   petId:201, desc:'초보 던전에 서식하는 녹색 슬라임. Lv.1 출현 시 포획 가능.' },
-  { id:'bat',        name:'쉐이드',      emoji:'🦇', rarity:'일반', habitat:'초보 던전',   desc:'어둠 속을 소리 없이 나는 박쥐형 마물.' },
+  { id:'bat',        name:'쉐이드',      emoji:'🦇', rarity:'일반', habitat:'초보 던전',   petId:102, desc:'어둠 속을 소리 없이 나는 박쥐형 마물. Lv.1 출현 시 포획 가능.' },
   { id:'fairy',      name:'네카',        emoji:'🧚', rarity:'희귀', habitat:'어두운 숲',   petId:202, desc:'독을 품은 숲의 정령. Lv.1 출현 시 포획 가능.' },
   { id:'goblin',     name:'그리블',      emoji:'👺', rarity:'희귀', habitat:'마물의 동굴', petId:203, desc:'동굴에 서식하는 소형 마물. Lv.1 출현 시 포획 가능.' },
   { id:'skeleton',   name:'오소렉',      emoji:'💀', rarity:'일반', habitat:'마물의 동굴', desc:'뼈로 이루어진 언데드 마물.' },
