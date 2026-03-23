@@ -23,18 +23,19 @@ function getScaledMonster(mapId) {
   const base  = MONSTERS[id];
   const level = randInt(map.levelRange[0], map.levelRange[1]);
   const scale = 1 + (level - 1) * 0.15;
-  const weak  = 0.70 + Math.random() * 0.10;
+  // Lv.1 = base stats (100%), Lv.2+ = 70~80% of scaled (wild penalty)
+  const wildPenalty = level === 1 ? 1.0 : (0.70 + Math.random() * 0.10);
 
   const capturable = level === 1 && !!base.petId;
   return {
     ...base,
-    hp:        Math.max(1, Math.floor(base.hp  * scale * weak)),
-    atk:       Math.max(1, Math.floor(base.atk * scale * weak)),
-    def:       Math.max(0, Math.floor(base.def * scale * weak)),
-    spd:       Math.max(1, Math.floor(base.spd * scale * weak)),
+    hp:        Math.max(1, Math.floor(base.hp  * scale * wildPenalty)),
+    atk:       Math.max(1, Math.floor(base.atk * scale * wildPenalty)),
+    def:       Math.max(0, Math.floor(base.def * scale * wildPenalty)),
+    spd:       Math.max(1, Math.floor(base.spd * scale * wildPenalty)),
     exp:       Math.floor(base.exp * scale),
     level,
-    currentHp: Math.max(1, Math.floor(base.hp * scale * weak)),
+    currentHp: Math.max(1, Math.floor(base.hp * scale * wildPenalty)),
     capturable,
     petId: capturable ? base.petId : undefined,
   };

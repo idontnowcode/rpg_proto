@@ -144,16 +144,26 @@ function enterMap(mapId) {
   renderMap();
 }
 
+function getMapTileSize(cols) {
+  // Compute tile size so map always fits within viewport horizontally
+  const available = window.innerWidth - 28; // body(4) + map-area border(4) + map-area padding(8) + margin(12)
+  const dynamic = Math.floor(available / cols);
+  return Math.min(36, Math.max(20, dynamic));
+}
+
 function renderMap() {
   const mapEl = document.getElementById('map-grid');
   const map = G.map;
-  mapEl.style.gridTemplateColumns = `repeat(${map.cols}, 36px)`;
+  const tileSize = getMapTileSize(map.cols);
+  mapEl.style.gridTemplateColumns = `repeat(${map.cols}, ${tileSize}px)`;
   mapEl.innerHTML = '';
 
   for (let r = 0; r < map.rows; r++) {
     for (let c = 0; c < map.cols; c++) {
       const tile = document.createElement('div');
       tile.className = 'tile';
+      tile.style.width  = tileSize + 'px';
+      tile.style.height = tileSize + 'px';
       const t = map.tiles[r][c];
       if (t === 1) tile.classList.add('tile-wall');
       else if (t === 2) tile.classList.add('tile-portal');
@@ -396,6 +406,17 @@ function startBattle() {
     const m = getScaledMonster(map.id);
     if (m) monsters.push(m);
   }
+
+  // Safety: any Lv.1 monster with a known petId becomes capturable
+  monsters.forEach(m => {
+    if (m.level === 1 && !m.capturable) {
+      const base = MONSTERS[m.id];
+      if (base && base.petId) {
+        m.capturable = true;
+        m.petId = base.petId;
+      }
+    }
+  });
 
   const pStats = getPlayerUIStats();
   G.battle = {

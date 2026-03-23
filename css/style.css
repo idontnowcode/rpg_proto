@@ -456,13 +456,9 @@ body {
     #hud-player-atk, #hud-player-def, #hud-player-spd { display: none; }
   }
 
-  /* ── Map tiles: clamp so 15-col map fits viewport ── */
-  .tile {
-    width:  clamp(20px, calc((100vw - 28px) / 15), 36px);
-    height: clamp(20px, calc((100vw - 28px) / 15), 36px);
-    font-size: clamp(0.6rem, 1.9vw, 1.1rem);
-  }
-  #map-area { padding: 4px; gap: 3px; }
+  /* tile size/grid columns are computed by JS (getMapTileSize) */
+  .tile { font-size: clamp(0.6rem, 1.9vw, 1.1rem); }
+  #map-area { padding: 4px; gap: 3px; overflow-x: hidden; }
   #map-log { max-height: 38px; font-size: 0.68rem; }
   .map-hint { display: none; }
 
