@@ -1,50 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
-  <!-- 폭풍새 (Storm Bird) — front-facing with spread wings -->
-  <!-- Wing feather tips: storm gray -->
-  <g fill="#88AABB">
-    <rect x="0"  y="6"  width="4"  height="2"/>
-    <rect x="28" y="6"  width="4"  height="2"/>
-    <rect x="0"  y="10" width="2"  height="2"/>
-    <rect x="30" y="10" width="2"  height="2"/>
+  <!-- 불새 (Fire Bird) -->
+  <g fill="#111111">
+    <rect x="10" y="4"  width="8"  height="2"/><rect x="8"  y="6"  width="2"  height="6"/>
+    <rect x="18" y="6"  width="2"  height="6"/><rect x="10" y="12" width="8"  height="2"/>
+    <rect x="12" y="12" width="4"  height="4"/><rect x="6"  y="14" width="2"  height="8"/>
+    <rect x="20" y="14" width="2"  height="8"/><rect x="6"  y="14" width="16" height="2"/>
+    <rect x="6"  y="22" width="16" height="2"/><rect x="4"  y="16" width="2"  height="6"/>
+    <rect x="22" y="16" width="2"  height="6"/><rect x="10" y="22" width="4"  height="4"/>
+    <rect x="14" y="22" width="4"  height="4"/><rect x="10" y="26" width="4"  height="2"/>
+    <rect x="14" y="26" width="4"  height="2"/><rect x="8"  y="28" width="4"  height="2"/>
+    <rect x="16" y="28" width="4"  height="2"/>
   </g>
-  <!-- Wings: dark storm blue-grey -->
-  <g fill="#334455">
-    <rect x="2"  y="4"  width="10" height="10"/>
-    <rect x="20" y="4"  width="10" height="10"/>
-    <rect x="0"  y="6"  width="4"  height="6"/>
-    <rect x="28" y="6"  width="4"  height="6"/>
+  <g fill="#FF6600">
+    <rect x="10" y="6"  width="8"  height="6"/><rect x="8"  y="14" width="12" height="8"/>
   </g>
-  <!-- Head and body: dark slate -->
-  <g fill="#223344">
-    <rect x="12" y="2"  width="8"  height="8"/>
-    <rect x="10" y="10" width="12" height="10"/>
-    <rect x="12" y="20" width="8"  height="4"/>
+  <g fill="#FF2200">
+    <rect x="6"  y="16" width="2"  height="4"/><rect x="22" y="16" width="2"  height="4"/>
+    <rect x="12" y="22" width="2"  height="4"/><rect x="16" y="22" width="2"  height="2"/>
   </g>
-  <!-- Steel beak -->
-  <g fill="#AABB00">
-    <rect x="14" y="8"  width="4"  height="4"/>
-  </g>
-  <!-- Eyes: sky blue -->
-  <g fill="#AACCFF">
-    <rect x="12" y="4"  width="2"  height="2"/>
-    <rect x="18" y="4"  width="2"  height="2"/>
-  </g>
-  <!-- Storm swirl patterns on wings -->
-  <g fill="#445566">
-    <rect x="4"  y="6"  width="4"  height="2"/>
-    <rect x="24" y="6"  width="4"  height="2"/>
-    <rect x="6"  y="10" width="4"  height="2"/>
-    <rect x="22" y="10" width="4"  height="2"/>
-  </g>
-  <!-- Tail feathers -->
-  <g fill="#334455">
-    <rect x="8"  y="22" width="4"  height="6"/>
-    <rect x="14" y="24" width="4"  height="4"/>
-    <rect x="20" y="22" width="4"  height="6"/>
-  </g>
-  <!-- Talons -->
-  <g fill="#112233">
-    <rect x="10" y="20" width="4"  height="2"/>
-    <rect x="18" y="20" width="4"  height="2"/>
-  </g>
+  <g fill="#FFDD00"><rect x="13" y="13" width="2" height="2"/></g>
+  <g fill="#FFAA00"><rect x="10" y="8" width="2" height="2"/><rect x="16" y="8" width="2" height="2"/></g>
 </svg>

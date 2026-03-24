@@ -1,63 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
-  <!-- 네카 (Green Fairy) — winged humanoid -->
-  <!-- Dragonfly-style wings: purple -->
-  <g fill="#7733AA">
-    <rect x="0"  y="4"  width="10" height="2"/>
-    <rect x="0"  y="6"  width="12" height="2"/>
-    <rect x="0"  y="8"  width="10" height="2"/>
-    <rect x="2"  y="10" width="8"  height="2"/>
-    <rect x="22" y="4"  width="10" height="2"/>
-    <rect x="20" y="6"  width="12" height="2"/>
-    <rect x="22" y="8"  width="10" height="2"/>
-    <rect x="22" y="10" width="8"  height="2"/>
-    <rect x="2"  y="12" width="8"  height="4"/>
-    <rect x="22" y="12" width="8"  height="4"/>
+  <!-- 요정 (Fairy) -->
+  <g fill="#111111">
+    <rect x="10" y="2"  width="8"  height="2"/><rect x="8"  y="4"  width="2"  height="2"/>
+    <rect x="18" y="4"  width="2"  height="2"/><rect x="8"  y="6"  width="12" height="2"/>
+    <rect x="8"  y="6"  width="2"  height="8"/><rect x="18" y="6"  width="2"  height="8"/>
+    <rect x="8"  y="14" width="12" height="2"/><rect x="10" y="14" width="2"  height="8"/>
+    <rect x="16" y="14" width="2"  height="8"/><rect x="10" y="14" width="8"  height="2"/>
+    <rect x="10" y="22" width="8"  height="2"/><rect x="0"  y="10" width="8"  height="2"/>
+    <rect x="0"  y="10" width="2"  height="6"/><rect x="2"  y="16" width="8"  height="2"/>
+    <rect x="22" y="10" width="8"  height="2"/><rect x="28" y="10" width="2"  height="6"/>
+    <rect x="22" y="16" width="8"  height="2"/><rect x="8"  y="22" width="2"  height="4"/>
+    <rect x="18" y="22" width="2"  height="4"/><rect x="8"  y="26" width="12" height="2"/>
+    <rect x="10" y="28" width="4"  height="2"/><rect x="14" y="28" width="4"  height="2"/>
   </g>
-  <!-- Wing shimmer -->
-  <g fill="#CC88FF">
-    <rect x="2"  y="6"  width="4"  height="4"/>
-    <rect x="26" y="6"  width="4"  height="4"/>
+  <g fill="#FFCC44">
+    <rect x="10" y="4"  width="8"  height="2"/><rect x="8"  y="6"  width="2"  height="2"/>
+    <rect x="18" y="6"  width="2"  height="2"/>
   </g>
-  <!-- Particle magic from hands -->
-  <g fill="#00FF88">
-    <rect x="8"  y="14" width="4"  height="2"/>
-    <rect x="20" y="14" width="4"  height="2"/>
+  <g fill="#FF88BB">
+    <rect x="10" y="8"  width="8"  height="6"/><rect x="12" y="16" width="4"  height="6"/>
   </g>
-  <!-- Hair: dark green -->
-  <g fill="#225511">
-    <rect x="12" y="0"  width="8"  height="4"/>
-    <rect x="10" y="2"  width="2"  height="4"/>
-    <rect x="20" y="2"  width="2"  height="4"/>
-  </g>
-  <!-- Head: emerald skin -->
-  <g fill="#44BB44">
-    <rect x="12" y="2"  width="8"  height="8"/>
-  </g>
-  <!-- Eyes: glowing teal -->
-  <g fill="#00FFAA">
-    <rect x="12" y="4"  width="2"  height="2"/>
-    <rect x="18" y="4"  width="2"  height="2"/>
-  </g>
-  <!-- Smile dot -->
-  <g fill="#226622">
-    <rect x="14" y="6"  width="4"  height="2"/>
-  </g>
-  <!-- Body: green tunic -->
-  <g fill="#33AA33">
-    <rect x="12" y="10" width="8"  height="8"/>
-  </g>
-  <!-- Belt -->
-  <g fill="#225511">
-    <rect x="12" y="14" width="8"  height="2"/>
-  </g>
-  <!-- Legs -->
-  <g fill="#226622">
-    <rect x="12" y="18" width="4"  height="8"/>
-    <rect x="16" y="18" width="4"  height="8"/>
-  </g>
-  <!-- Feet -->
-  <g fill="#113311">
-    <rect x="10" y="24" width="4"  height="2"/>
-    <rect x="18" y="24" width="4"  height="2"/>
-  </g>
+  <g fill="#FFBBDD"><rect x="2" y="12" width="6" height="4"/><rect x="22" y="12" width="6" height="4"/></g>
+  <g fill="#FFEEAA"><rect x="10" y="24" width="8" height="2"/></g>
+  <g fill="#7722FF"><rect x="10" y="10" width="2" height="2"/><rect x="16" y="10" width="2" height="2"/></g>
+  <g fill="#FF88BB"><rect x="12" y="12" width="4" height="2"/></g>
 </svg>

@@ -1,39 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
-  <!-- 불꽃 영령 (Fire Spirit/Ghost) — 16×16 pixel art -->
-  <!-- Flame crown tips -->
-  <g fill="#FFDD00">
-    <rect x="6"  y="0"  width="2"  height="2"/>
-    <rect x="14" y="0"  width="4"  height="2"/>
-    <rect x="24" y="0"  width="2"  height="2"/>
-    <rect x="4"  y="2"  width="4"  height="2"/>
-    <rect x="24" y="2"  width="4"  height="2"/>
+  <!-- 유령 (Ghost) -->
+  <g fill="#111111">
+    <rect x="10" y="4"  width="6"  height="2"/><rect x="8"  y="6"  width="2"  height="2"/>
+    <rect x="16" y="6"  width="2"  height="2"/><rect x="8"  y="6"  width="10" height="2"/>
+    <rect x="6"  y="8"  width="2"  height="12"/><rect x="18" y="8"  width="2"  height="12"/>
+    <rect x="4"  y="14" width="2"  height="8"/><rect x="20" y="14" width="2"  height="8"/>
+    <rect x="6"  y="12" width="12" height="2"/><rect x="4"  y="22" width="4"  height="2"/>
+    <rect x="10" y="22" width="6"  height="2"/><rect x="18" y="22" width="4"  height="2"/>
+    <rect x="4"  y="24" width="2"  height="4"/><rect x="10" y="24" width="2"  height="4"/>
+    <rect x="16" y="24" width="2"  height="4"/><rect x="20" y="24" width="2"  height="4"/>
+    <rect x="6"  y="26" width="2"  height="2"/><rect x="12" y="26" width="2"  height="2"/>
+    <rect x="18" y="26" width="2"  height="2"/>
   </g>
-  <!-- Bright orange body highlight -->
-  <g fill="#FF9900">
-    <rect x="10" y="2"  width="12" height="2"/>
-    <rect x="8"  y="4"  width="16" height="2"/>
+  <g fill="#EEEEFF">
+    <rect x="8"  y="8"  width="10" height="14"/><rect x="6"  y="10" width="2"  height="10"/>
+    <rect x="18" y="10" width="2"  height="10"/><rect x="10" y="6"  width="6"  height="2"/>
+    <rect x="6"  y="20" width="14" height="2"/>
   </g>
-  <!-- Main body: orange-red ghost -->
-  <g fill="#EE4400">
-    <rect x="6"  y="4"  width="20" height="2"/>
-    <rect x="6"  y="6"  width="20" height="8"/>
-    <rect x="6"  y="14" width="20" height="2"/>
-    <rect x="4"  y="16" width="24" height="2"/>
-    <!-- Wavy bottom edge -->
-    <rect x="4"  y="18" width="6"  height="2"/>
-    <rect x="14" y="18" width="4"  height="2"/>
-    <rect x="22" y="18" width="6"  height="2"/>
-    <rect x="4"  y="20" width="4"  height="2"/>
-    <rect x="14" y="20" width="4"  height="2"/>
-    <rect x="24" y="20" width="4"  height="2"/>
-  </g>
-  <!-- White glowing eyes -->
-  <g fill="#FFFFFF">
-    <rect x="10" y="8"  width="4"  height="4"/>
-    <rect x="18" y="8"  width="4"  height="4"/>
-  </g>
-  <g fill="#FFAA00">
-    <rect x="12" y="10" width="2"  height="2"/>
-    <rect x="20" y="10" width="2"  height="2"/>
-  </g>
+  <g fill="#FFFFFF"><rect x="10" y="10" width="6" height="8"/></g>
+  <g fill="#22CCCC"><rect x="8" y="10" width="2" height="2"/><rect x="16" y="10" width="2" height="2"/></g>
 </svg>

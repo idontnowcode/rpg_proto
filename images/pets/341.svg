@@ -1,44 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
-  <!-- 빛나는 물고기 (Glow Fish) — side view -->
-  <!-- Tail fin -->
-  <g fill="#2255AA">
-    <rect x="24" y="6"  width="4"  height="2"/>
-    <rect x="26" y="8"  width="4"  height="4"/>
-    <rect x="24" y="12" width="4"  height="2"/>
+  <!-- 물고기 (Fish) -->
+  <g fill="#111111">
+    <rect x="22" y="6"  width="2"  height="18"/><rect x="24" y="4"  width="2"  height="22"/>
+    <rect x="26" y="2"  width="2"  height="26"/><rect x="4"  y="10" width="18" height="2"/>
+    <rect x="4"  y="10" width="2"  height="10"/><rect x="20" y="10" width="2"  height="10"/>
+    <rect x="4"  y="20" width="18" height="2"/><rect x="2"  y="12" width="2"  height="6"/>
+    <rect x="0"  y="14" width="2"  height="4"/><rect x="8"  y="8"  width="8"  height="2"/>
+    <rect x="8"  y="8"  width="2"  height="2"/><rect x="14" y="8"  width="2"  height="2"/>
+    <rect x="8"  y="18" width="4"  height="4"/>
   </g>
-  <!-- Body: silver-blue with glow -->
-  <g fill="#6699CC">
-    <rect x="6"  y="8"  width="22" height="8"/>
-    <rect x="8"  y="6"  width="18" height="2"/>
-    <rect x="8"  y="16" width="18" height="2"/>
-    <rect x="10" y="4"  width="12" height="2"/>
-    <rect x="10" y="18" width="12" height="2"/>
+  <g fill="#4499CC">
+    <rect x="4"  y="12" width="16" height="8"/><rect x="6"  y="10" width="14" height="2"/>
+    <rect x="6"  y="20" width="14" height="2"/>
   </g>
-  <!-- Bioluminescent glow patches -->
-  <g fill="#AAEEFF">
-    <rect x="10" y="10" width="6"  height="4"/>
-    <rect x="18" y="8"  width="4"  height="2"/>
+  <g fill="#88CCFF"><rect x="6" y="14" width="10" height="4"/></g>
+  <g fill="#66BBEE">
+    <rect x="24" y="6"  width="2"  height="18"/><rect x="26" y="4"  width="2"  height="22"/>
+    <rect x="10" y="8"  width="4"  height="2"/>
   </g>
-  <!-- Scales outline -->
-  <g fill="#336688">
-    <rect x="14" y="8"  width="2"  height="8"/>
-    <rect x="20" y="8"  width="2"  height="8"/>
-  </g>
-  <!-- Eye: teal glow -->
-  <g fill="#FFFFFF">
-    <rect x="8"  y="10" width="4"  height="4"/>
-  </g>
-  <g fill="#00CCAA">
-    <rect x="10" y="12" width="2"  height="2"/>
-  </g>
-  <!-- Dorsal fin -->
-  <g fill="#4477AA">
-    <rect x="10" y="4"  width="2"  height="4"/>
-    <rect x="14" y="4"  width="2"  height="4"/>
-    <rect x="18" y="4"  width="2"  height="4"/>
-  </g>
-  <!-- Glowing edge -->
-  <g fill="#CCFFFF">
-    <rect x="6"  y="10" width="2"  height="4"/>
-  </g>
+  <g fill="#111111"><rect x="4" y="12" width="2" height="2"/></g>
 </svg>

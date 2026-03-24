@@ -1,57 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
-  <!-- 해골 궁수 (Skeleton Archer) — skull face with bow -->
-  <!-- Skull: bone white -->
-  <g fill="#DDCCAA">
-    <rect x="8"  y="2"  width="16" height="12"/>
-    <rect x="6"  y="4"  width="20" height="8"/>
+  <!-- 해골 전사 (Skeleton) -->
+  <g fill="#111111">
+    <rect x="10" y="2"  width="8"  height="2"/><rect x="8"  y="4"  width="2"  height="8"/>
+    <rect x="18" y="4"  width="2"  height="8"/><rect x="10" y="12" width="8"  height="2"/>
+    <rect x="8"  y="10" width="4"  height="2"/><rect x="16" y="10" width="4"  height="2"/>
+    <rect x="12" y="14" width="4"  height="10"/><rect x="6"  y="15" width="6"  height="2"/>
+    <rect x="16" y="15" width="6"  height="2"/><rect x="6"  y="19" width="6"  height="2"/>
+    <rect x="16" y="19" width="6"  height="2"/><rect x="4"  y="14" width="6"  height="2"/>
+    <rect x="4"  y="14" width="2"  height="6"/><rect x="4"  y="20" width="4"  height="2"/>
+    <rect x="2"  y="22" width="4"  height="2"/><rect x="20" y="14" width="6"  height="2"/>
+    <rect x="24" y="14" width="2"  height="6"/><rect x="22" y="20" width="4"  height="2"/>
+    <rect x="24" y="22" width="4"  height="2"/><rect x="10" y="24" width="4"  height="6"/>
+    <rect x="16" y="24" width="4"  height="6"/><rect x="8"  y="28" width="4"  height="2"/>
+    <rect x="18" y="28" width="4"  height="2"/>
   </g>
-  <!-- Jaw bone: slightly darker -->
-  <g fill="#CCBB99">
-    <rect x="8"  y="12" width="16" height="4"/>
-    <rect x="10" y="14" width="12" height="2"/>
+  <g fill="#EEDDCC">
+    <rect x="10" y="4"  width="8"  height="6"/><rect x="8"  y="6"  width="2"  height="4"/>
+    <rect x="18" y="6"  width="2"  height="4"/><rect x="12" y="15" width="2"  height="8"/>
+    <rect x="12" y="24" width="2"  height="4"/><rect x="18" y="24" width="2"  height="4"/>
   </g>
-  <!-- Hollow eye sockets -->
-  <g fill="#000000">
-    <rect x="8"  y="6"  width="6"  height="6"/>
-    <rect x="18" y="6"  width="6"  height="6"/>
-  </g>
-  <!-- Green ghost flame in eyes -->
-  <g fill="#00CC44">
-    <rect x="10" y="8"  width="2"  height="2"/>
-    <rect x="20" y="8"  width="2"  height="2"/>
-  </g>
-  <!-- Nose hollow -->
-  <g fill="#000000">
-    <rect x="14" y="10" width="4"  height="2"/>
-  </g>
-  <!-- Jaw teeth -->
-  <g fill="#EEDDBB">
-    <rect x="10" y="14" width="2"  height="4"/>
-    <rect x="14" y="14" width="2"  height="4"/>
-    <rect x="18" y="14" width="2"  height="4"/>
-    <rect x="22" y="14" width="2"  height="4"/>
-  </g>
-  <!-- Spine/ribcage -->
-  <g fill="#CCBB99">
-    <rect x="12" y="18" width="8"  height="10"/>
-    <rect x="10" y="20" width="12" height="2"/>
-    <rect x="10" y="24" width="12" height="2"/>
-  </g>
-  <!-- Bow (on left side) -->
-  <g fill="#886644">
-    <rect x="0"  y="4"  width="2"  height="20"/>
-    <rect x="2"  y="4"  width="2"  height="2"/>
-    <rect x="2"  y="22" width="2"  height="2"/>
-  </g>
-  <!-- Bowstring -->
-  <g fill="#CCAA88">
-    <rect x="0"  y="6"  width="2"  height="16"/>
-  </g>
-  <!-- Arrow held -->
-  <g fill="#AA7744">
-    <rect x="4"  y="12" width="12" height="2"/>
-  </g>
-  <g fill="#CC4400">
-    <rect x="2"  y="12" width="2"  height="2"/>
-  </g>
+  <g fill="#CC0000"><rect x="10" y="8" width="2" height="2"/><rect x="16" y="8" width="2" height="2"/></g>
+  <g fill="#AABBCC"><rect x="12" y="10" width="4" height="2"/></g>
 </svg>

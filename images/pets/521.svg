@@ -1,60 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
-  <!-- 소형 악마 (Imp / Small Demon) — small winged demon -->
-  <!-- Small curved horns -->
-  <g fill="#661122">
-    <rect x="8"  y="0"  width="2"  height="4"/>
-    <rect x="22" y="0"  width="2"  height="4"/>
-    <rect x="6"  y="2"  width="4"  height="2"/>
-    <rect x="22" y="2"  width="4"  height="2"/>
+  <!-- 악마 (Demon) -->
+  <g fill="#111111">
+    <rect x="8"  y="0"  width="2"  height="6"/><rect x="18" y="0"  width="2"  height="6"/>
+    <rect x="6"  y="0"  width="4"  height="2"/><rect x="18" y="0"  width="4"  height="2"/>
+    <rect x="8"  y="6"  width="12" height="2"/><rect x="8"  y="6"  width="2"  height="8"/>
+    <rect x="18" y="6"  width="2"  height="8"/><rect x="8"  y="14" width="12" height="2"/>
+    <rect x="8"  y="14" width="2"  height="10"/><rect x="18" y="14" width="2"  height="10"/>
+    <rect x="10" y="14" width="8"  height="2"/><rect x="10" y="24" width="8"  height="2"/>
+    <rect x="0"  y="14" width="8"  height="2"/><rect x="0"  y="14" width="2"  height="8"/>
+    <rect x="2"  y="22" width="6"  height="2"/><rect x="22" y="14" width="8"  height="2"/>
+    <rect x="28" y="14" width="2"  height="8"/><rect x="22" y="22" width="6"  height="2"/>
+    <rect x="10" y="24" width="4"  height="6"/><rect x="16" y="24" width="4"  height="6"/>
+    <rect x="16" y="22" width="2"  height="4"/><rect x="18" y="20" width="2"  height="2"/>
+    <rect x="20" y="18" width="2"  height="4"/>
   </g>
-  <!-- Bat wings (small) -->
-  <g fill="#440011">
-    <rect x="0"  y="8"  width="8"  height="8"/>
-    <rect x="24" y="8"  width="8"  height="8"/>
-    <rect x="2"  y="6"  width="6"  height="4"/>
-    <rect x="24" y="6"  width="6"  height="4"/>
+  <g fill="#CC2200"><rect x="9" y="2" width="2" height="4"/><rect x="19" y="2" width="2" height="4"/></g>
+  <g fill="#882222">
+    <rect x="10" y="8"  width="8"  height="6"/><rect x="10" y="16" width="8"  height="8"/>
   </g>
-  <g fill="#660022">
-    <rect x="2"  y="10" width="4"  height="4"/>
-    <rect x="26" y="10" width="4"  height="4"/>
-  </g>
-  <!-- Head: dark crimson -->
-  <g fill="#882244">
-    <rect x="8"  y="2"  width="16" height="10"/>
-  </g>
-  <!-- Eyes: yellow -->
-  <g fill="#FFCC00">
-    <rect x="10" y="6"  width="4"  height="4"/>
-    <rect x="18" y="6"  width="4"  height="4"/>
-  </g>
-  <g fill="#996600">
-    <rect x="12" y="8"  width="2"  height="2"/>
-    <rect x="20" y="8"  width="2"  height="2"/>
-  </g>
-  <!-- Fanged grin -->
-  <g fill="#FFFFFF">
-    <rect x="12" y="10" width="2"  height="2"/>
-    <rect x="18" y="10" width="2"  height="2"/>
-  </g>
-  <!-- Body: stocky -->
-  <g fill="#771133">
-    <rect x="8"  y="12" width="16" height="10"/>
-    <rect x="10" y="22" width="12" height="4"/>
-  </g>
-  <!-- Tail with barb -->
-  <g fill="#661122">
-    <rect x="22" y="18" width="4"  height="2"/>
-    <rect x="24" y="20" width="4"  height="2"/>
-    <rect x="26" y="22" width="4"  height="2"/>
-  </g>
-  <g fill="#FFCC00">
-    <rect x="28" y="22" width="2"  height="4"/><!-- barb -->
-  </g>
-  <!-- Clawed feet -->
-  <g fill="#441100">
-    <rect x="8"  y="26" width="6"  height="4"/>
-    <rect x="18" y="26" width="6"  height="4"/>
-    <rect x="6"  y="28" width="4"  height="2"/>
-    <rect x="22" y="28" width="4"  height="2"/>
-  </g>
+  <g fill="#441111"><rect x="12" y="10" width="4" height="2"/></g>
+  <g fill="#551111"><rect x="2" y="16" width="6" height="6"/><rect x="22" y="16" width="6" height="6"/></g>
+  <g fill="#FFAA00"><rect x="10" y="8" width="2" height="2"/><rect x="16" y="8" width="2" height="2"/></g>
+  <g fill="#882222"><rect x="12" y="26" width="2" height="2"/><rect x="18" y="26" width="2" height="2"/></g>
 </svg>

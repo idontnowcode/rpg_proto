@@ -1,41 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
-  <!-- 얼음 영령 (Ice Spirit/Ghost) — 16×16 pixel art -->
-  <!-- Ice crystal crown -->
-  <g fill="#FFFFFF">
-    <rect x="10" y="0"  width="4"  height="2"/>
-    <rect x="6"  y="2"  width="2"  height="2"/>
-    <rect x="24" y="2"  width="2"  height="2"/>
+  <!-- 악령 (Evil Spirit) -->
+  <g fill="#111111">
+    <rect x="10" y="4"  width="6"  height="2"/><rect x="8"  y="6"  width="2"  height="2"/>
+    <rect x="16" y="6"  width="2"  height="2"/><rect x="8"  y="6"  width="10" height="2"/>
+    <rect x="6"  y="8"  width="2"  height="12"/><rect x="18" y="8"  width="2"  height="12"/>
+    <rect x="4"  y="14" width="2"  height="8"/><rect x="20" y="14" width="2"  height="8"/>
+    <rect x="6"  y="12" width="12" height="2"/><rect x="4"  y="22" width="4"  height="2"/>
+    <rect x="10" y="22" width="6"  height="2"/><rect x="18" y="22" width="4"  height="2"/>
+    <rect x="4"  y="24" width="2"  height="4"/><rect x="10" y="24" width="2"  height="4"/>
+    <rect x="16" y="24" width="2"  height="4"/><rect x="20" y="24" width="2"  height="4"/>
+    <rect x="6"  y="26" width="2"  height="2"/><rect x="12" y="26" width="2"  height="2"/>
+    <rect x="18" y="26" width="2"  height="2"/>
   </g>
-  <!-- Highlight -->
-  <g fill="#CCEEFF">
-    <rect x="10" y="2"  width="12" height="2"/>
-    <rect x="8"  y="4"  width="16" height="2"/>
+  <g fill="#333344">
+    <rect x="8"  y="8"  width="10" height="14"/><rect x="6"  y="10" width="2"  height="10"/>
+    <rect x="18" y="10" width="2"  height="10"/><rect x="10" y="6"  width="6"  height="2"/>
+    <rect x="6"  y="20" width="14" height="2"/>
   </g>
-  <!-- Main body: ice blue ghost -->
-  <g fill="#88CCEE">
-    <rect x="6"  y="4"  width="20" height="2"/>
-    <rect x="6"  y="6"  width="20" height="8"/>
-    <rect x="6"  y="14" width="20" height="2"/>
-    <rect x="4"  y="16" width="24" height="2"/>
-    <rect x="4"  y="18" width="6"  height="2"/>
-    <rect x="14" y="18" width="4"  height="2"/>
-    <rect x="22" y="18" width="6"  height="2"/>
-    <rect x="4"  y="20" width="4"  height="2"/>
-    <rect x="14" y="20" width="4"  height="2"/>
-    <rect x="24" y="20" width="4"  height="2"/>
-  </g>
-  <!-- White glowing eyes -->
-  <g fill="#FFFFFF">
-    <rect x="10" y="8"  width="4"  height="4"/>
-    <rect x="18" y="8"  width="4"  height="4"/>
-  </g>
-  <g fill="#5599BB">
-    <rect x="12" y="10" width="2"  height="2"/>
-    <rect x="20" y="10" width="2"  height="2"/>
-  </g>
-  <!-- Ice shard accents -->
-  <g fill="#AADDFF">
-    <rect x="4"  y="10" width="2"  height="4"/>
-    <rect x="26" y="10" width="2"  height="4"/>
-  </g>
+  <g fill="#222233"><rect x="10" y="10" width="6" height="8"/></g>
+  <g fill="#FF2222"><rect x="8" y="10" width="2" height="2"/><rect x="16" y="10" width="2" height="2"/></g>
 </svg>
