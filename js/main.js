@@ -51,6 +51,10 @@ function loadGame(username) {
     if (G.party.length === 0 && Inventory.pets.length > 0) G.party = [Inventory.pets[0]];
     G.pet = G.party[0] || Inventory.pets[0];
     G._loadedMapId = data.mapId || 'town';
+    // 구 세이브 호환: initStats 없는 페트에 Lv1 스탯 근사값 복원
+    Inventory.pets.forEach(pet => {
+      if (!pet.initStats) pet.initStats = petInitStatsFromBase(pet);
+    });
     return true;
   } catch (e) { return false; }
 }
@@ -225,17 +229,30 @@ function addMapLog(msg) {
 
 // ── HUD ───────────────────────────────────────────────────────────────────────
 function updateHUD() {
-  const pet = G.pet;
-  const petStats = getUIStats(pet);
-
-  const petCurHp = pet.currentHp !== undefined ? pet.currentHp : petStats.hp;
-  document.getElementById('hud-name').innerHTML =
-    `${pet.emoji || '🐾'} ${pet.name} Lv.${pet.level} <span class="grade-badge grade-${pet.grade||'B'}">${pet.grade||'B'}</span>`;
-  document.getElementById('hud-hp').textContent       = `HP ${petCurHp}/${petStats.hp}`;
-  document.getElementById('hud-atk').textContent      = `ATK ${petStats.atk}`;
-  document.getElementById('hud-def').textContent      = `DEF ${petStats.def}`;
-  document.getElementById('hud-spd').textContent      = `SPD ${petStats.spd}`;
-  document.getElementById('hud-exp').textContent      = `EXP ${pet.exp}/${pet.expToNext}`;
+  // 출전 중인 파티 전원 표시
+  const partyEl = document.getElementById('hud-party');
+  partyEl.innerHTML = G.party.map(p => {
+    const s   = getUIStats(p);
+    const cur = p.currentHp !== undefined ? p.currentHp : s.hp;
+    const ini = p.initStats || petInitStatsFromBase(p);
+    let hpGr = '-', stGr = '-';
+    if (p.level > 1 && ini) {
+      const n = p.level - 1;
+      hpGr = ((s.hp - ini.hp) / n).toFixed(1);
+      stGr = (((s.atk + s.def + s.spd) - (ini.atk + ini.def + ini.spd)) / n).toFixed(1);
+    }
+    return `<div class="hud-row">
+      <span class="hud-name">${p.emoji || '🐾'} ${p.name} Lv.${p.level} <span class="grade-badge grade-${p.grade||'B'}">${p.grade||'B'}</span></span>
+      <span class="hud-hp">HP ${cur}/${s.hp}</span>
+      <span class="hud-atk">ATK ${s.atk}</span>
+      <span class="hud-def">DEF ${s.def}</span>
+      <span class="hud-spd">SPD ${s.spd}</span>
+      <span class="hud-exp">EXP ${p.exp}/${p.expToNext}</span>
+    </div>
+    <div class="hud-row hud-growth-row">
+      <span class="hud-growth">HP 성장률: ${hpGr} | 성장률: ${stGr}</span>
+    </div>`;
+  }).join('');
 
   const pStats = getPlayerUIStats();
   document.getElementById('hud-player-name').textContent = `🧑 캐릭터 Lv.${Player.level}`;
@@ -299,8 +316,8 @@ function updateCharStatPanel() {
   }
 }
 
-function allocateStat(stat) {
-  if (playerAllocateStat(stat)) {
+function allocateStat(stat, amount = 1) {
+  if (playerAllocateStat(stat, amount)) {
     updateHUD();
     updateCharStatPanel();
     saveGame();
@@ -321,6 +338,16 @@ function renderPetPanel() {
     const inParty  = partyPos >= 0;
     const price    = petSellPrice(pet);
 
+    // 성장률 계산
+    const initSt = pet.initStats || petInitStatsFromBase(pet);
+    let hpGrowthStr = '-', statGrowthStr = '-';
+    if (pet.level > 1 && initSt) {
+      const n = pet.level - 1;
+      hpGrowthStr   = ((stats.hp - initSt.hp) / n).toFixed(1);
+      statGrowthStr = (((stats.atk + stats.def + stats.spd)
+                      - (initSt.atk + initSt.def + initSt.spd)) / n).toFixed(1);
+    }
+
     const div = document.createElement('div');
     div.className = `pet-item${inParty ? ' active-pet' : ''}`;
     div.innerHTML = `
@@ -331,7 +358,8 @@ function renderPetPanel() {
           <span class="rarity-badge rarity-${(pet.rarity||'일반').replace(/[^a-zA-Z가-힣]/g,'')}">${pet.rarity||'일반'}</span>
           ${inParty ? `<span class="tag-active">파티 ${partyPos+1}번</span>` : ''}
         </div>
-        <span>HP ${stats.hp} | ATK ${stats.atk} | DEF ${stats.def}</span>
+        <span>HP ${stats.hp} | ATK ${stats.atk} | DEF ${stats.def} | SPD ${stats.spd}</span>
+        <span class="pet-growth">HP 성장률: ${hpGrowthStr} | 성장률: ${statGrowthStr}</span>
       </div>
       <div class="pet-item-actions">
         ${!inParty && G.party.length < 3
@@ -451,6 +479,31 @@ function setTarget(idx) {
 }
 
 // ── Battle: Render ────────────────────────────────────────────────────────────
+// ── Rarity → portrait CSS class ─────────────────────────────────────────────
+function rarityPortraitClass(rarity) {
+  const map = { '일반':'common', '희귀':'rare', '전설':'legend', '신화':'myth', '레어':'epic' };
+  return map[rarity] || 'common';
+}
+function monsterRarityLabel(m) {
+  if (m.petId && typeof PET_MASTER !== 'undefined' && PET_MASTER[m.petId]) {
+    return PET_MASTER[m.petId].rarity || '일반';
+  }
+  // tier-based fallback by exp
+  if (m.exp >= 150) return '전설';
+  if (m.exp >= 80)  return '희귀';
+  return '일반';
+}
+
+// ── Flash hit animation ───────────────────────────────────────────────────────
+function flashHit(elId) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  el.classList.remove('hit-flash');
+  void el.offsetWidth; // reflow to restart animation
+  el.classList.add('hit-flash');
+  setTimeout(() => el.classList.remove('hit-flash'), 350);
+}
+
 function renderBattle() {
   const b = G.battle;
 
@@ -460,20 +513,35 @@ function renderBattle() {
   b.monsters.forEach((m, idx) => {
     const pct      = Math.max(0, m.currentHp / m.hp * 100);
     const isTarget = idx === b.targetIdx && m.currentHp > 0;
+    const rarity   = monsterRarityLabel(m);
+    const porCls   = rarityPortraitClass(rarity);
     const card     = document.createElement('div');
 
+    card.id = `enemy-card-${idx}`;
     card.className = [
       'combatant', 'enemy-card',
       m.currentHp <= 0 ? 'defeated' : '',
-      m.capturable   ? 'capturable' : '',
-      isTarget       ? 'targeted'   : '',
+      m.capturable      ? 'capturable' : '',
+      isTarget          ? 'targeted'   : '',
     ].filter(Boolean).join(' ');
 
+    const mMaster   = m.petId ? PET_MASTER[m.petId] : null;
+    const mPortrait = mMaster?.img
+      ? `<img src="${mMaster.img}" class="battle-sprite" alt="${m.name}">`
+      : `<div class="portrait-emoji">${m.emoji}</div>`;
     card.innerHTML = `
-      <div class="combatant-name">${m.emoji}${m.capturable ? ' ✨' : ''} Lv.${m.level} ${m.name}</div>
-      <div class="hp-bar-bg"><div class="hp-bar monster-bar" style="width:${pct}%"></div></div>
-      <div class="combatant-hp">${Math.max(0, m.currentHp)} / ${m.hp}</div>
-      ${isTarget ? '<div class="target-indicator">▼ 대상</div>' : ''}
+      <div class="portrait-area portrait-${porCls}">
+        ${mPortrait}
+        <div class="portrait-lv">Lv.${m.level}</div>
+        <div class="portrait-rarity rarity-${rarity}">${rarity}</div>
+        ${m.capturable ? '<div class="portrait-capturable">✨</div>' : ''}
+      </div>
+      <div class="card-body">
+        <div class="combatant-name">${m.name}</div>
+        <div class="hp-bar-bg"><div class="hp-bar monster-bar" style="width:${pct}%"></div></div>
+        <div class="combatant-hp">${Math.max(0, m.currentHp)} / ${m.hp}</div>
+        ${isTarget ? '<div class="target-indicator">▼ 대상</div>' : ''}
+      </div>
     `;
     if (m.currentHp > 0) card.addEventListener('click', () => setTarget(idx));
     enemiesEl.appendChild(card);
@@ -481,28 +549,44 @@ function renderBattle() {
 
   // ── Allies (player + party)
   const playerPct = b.playerMaxHp > 0 ? Math.max(0, b.playerHp / b.playerMaxHp * 100) : 0;
-  const alliesEl = document.getElementById('battle-allies');
+  const alliesEl  = document.getElementById('battle-allies');
   alliesEl.innerHTML = `
     <div class="combatant${b.playerHp <= 0 ? ' defeated' : ''}" id="ally-player">
-      <div class="combatant-name">🧑 캐릭터 Lv.${Player.level}</div>
-      <div class="hp-bar-bg"><div class="hp-bar player-bar" style="width:${playerPct}%"></div></div>
-      <div class="combatant-hp">HP ${Math.max(0,b.playerHp)} / ${b.playerMaxHp}</div>
+      <div class="portrait-area portrait-player">
+        <div class="portrait-emoji">🧑</div>
+        <div class="portrait-lv">Lv.${Player.level}</div>
+      </div>
+      <div class="card-body">
+        <div class="combatant-name">캐릭터</div>
+        <div class="hp-bar-bg"><div class="hp-bar player-bar" style="width:${playerPct}%"></div></div>
+        <div class="combatant-hp">HP ${Math.max(0,b.playerHp)} / ${b.playerMaxHp}</div>
+      </div>
     </div>
     ${G.party.map((p, pi) => {
-      const pct = b.petsMaxHp[pi] > 0 ? Math.max(0, b.petsHp[pi] / b.petsMaxHp[pi] * 100) : 0;
+      const pct    = b.petsMaxHp[pi] > 0 ? Math.max(0, b.petsHp[pi] / b.petsMaxHp[pi] * 100) : 0;
+      const rarity = p.master?.rarity || '일반';
+      const porCls = rarityPortraitClass(rarity);
+      const petImg     = p.master?.img;
+      const petPortrait = petImg
+        ? `<img src="${petImg}" class="battle-sprite" alt="${p.name}">`
+        : `<div class="portrait-emoji">${p.emoji||'🐾'}</div>`;
       return `<div class="combatant${b.petsHp[pi] <= 0 ? ' defeated' : ''}" id="ally-pet-${pi}">
-        <div class="combatant-name">${p.emoji||'🐾'} ${p.name} Lv.${p.level} <span class="grade-badge grade-${p.grade||'B'}">${p.grade||'B'}</span></div>
-        <div class="hp-bar-bg"><div class="hp-bar player-bar-pet" style="width:${pct}%"></div></div>
-        <div class="combatant-hp">HP ${Math.max(0,b.petsHp[pi])} / ${b.petsMaxHp[pi]}</div>
+        <div class="portrait-area portrait-pet portrait-${porCls}">
+          ${petPortrait}
+          <div class="portrait-lv">Lv.${p.level}</div>
+          <div class="portrait-rarity rarity-${rarity}">${p.grade||'B'}급</div>
+        </div>
+        <div class="card-body">
+          <div class="combatant-name">${p.name}</div>
+          <div class="hp-bar-bg"><div class="hp-bar player-bar-pet" style="width:${pct}%"></div></div>
+          <div class="combatant-hp">HP ${Math.max(0,b.petsHp[pi])} / ${b.petsMaxHp[pi]}</div>
+        </div>
       </div>`;
     }).join('')}
   `;
 
-  // ── Capture button: always visible, state changes by target
+  // ── Capture button state
   updateCaptureBtn();
-
-  // ── Pixel art battle canvas
-  drawBattleCanvas();
 }
 
 function updateCaptureBtn() {
@@ -572,6 +656,7 @@ function executeTurns(order, idx) {
       const dmg = calcDamage(getPlayerUIStats().atk, target.def);
       target.currentHp = Math.max(0, target.currentHp - dmg);
       addBattleLog(`💥 캐릭터 → ${target.name} ${dmg} 데미지!`);
+      flashHit(`enemy-card-${b.targetIdx}`);
     }
 
   } else if (unit.type === 'pet') {
@@ -585,6 +670,7 @@ function executeTurns(order, idx) {
         const dmg = calcDamage(getUIStats(p).atk, petTarget.def);
         petTarget.currentHp = Math.max(0, petTarget.currentHp - dmg);
         addBattleLog(`💥 ${p.name} → ${petTarget.name} ${dmg} 데미지!`);
+        flashHit(`enemy-card-${b.monsters.indexOf(petTarget)}`);
       }
     }
 
@@ -605,12 +691,14 @@ function executeTurns(order, idx) {
         const dmg = calcDamage(m.atk, getPlayerUIStats().def);
         b.playerHp = Math.max(0, b.playerHp - dmg);
         addBattleLog(`💢 ${m.name} → 캐릭터 ${dmg} 데미지!`);
+        flashHit('ally-player');
       } else {
         const pi  = tgt.pi;
         const pp  = G.party[pi];
         const dmg = calcDamage(m.atk, getUIStats(pp).def);
         b.petsHp[pi] = Math.max(0, b.petsHp[pi] - dmg);
         addBattleLog(`💢 ${m.name} → ${pp.name} ${dmg} 데미지!`);
+        flashHit(`ally-pet-${pi}`);
         if (b.petsHp[pi] <= 0) addBattleLog(`💀 ${pp.name} 쓰러짐!`);
       }
     }
@@ -662,8 +750,8 @@ function onCapture() {
     addBattleLog(`✨ ${target.name} 포획 성공!`);
 
     if (Inventory.pets.length < Inventory.maxPets) {
-      const newPet = createLevel1Pet(target.petId);
-      newPet.currentHp = getUIStats(newPet).hp;
+      const newPet = captureMonsterAsPet(target);
+      if (!newPet) { addBattleLog('포획 처리 오류'); return; }
       addPetToInventory(newPet);
       addBattleLog(`📦 인벤토리 추가 (${Inventory.pets.length}/${Inventory.maxPets})`);
     } else {
@@ -782,21 +870,26 @@ function renderCompendium(tab) {
   if (tab === 'starter') {
     el.innerHTML = Object.values(PET_MASTER)
       .filter(m => m.habitat === '초기 선택')
-      .map(m => compCard(m.petId, m.emoji, m.name, m.type, m.rarity, m.habitat, m.desc, ownedIds.has(m.petId), rarityColor))
+      .map(m => compCard(m.petId, m.emoji, m.name, m.type, m.rarity, m.habitat, m.desc, ownedIds.has(m.petId), rarityColor, m.img))
       .join('');
   } else {
     el.innerHTML = COMPENDIUM_WILD.map(w => {
-      const owned = w.petId && ownedIds.has(w.petId);
-      return compCard(w.petId, w.emoji, w.name, w.id, w.rarity, w.habitat, w.desc, owned, rarityColor);
+      const owned  = w.petId && ownedIds.has(w.petId);
+      const master = w.petId ? PET_MASTER[w.petId] : null;
+      return compCard(w.petId, w.emoji, w.name, w.id, w.rarity, w.habitat, w.desc, owned, rarityColor, master?.img);
     }).join('');
   }
 }
 
-function compCard(petId, emoji, name, type, rarity, habitat, desc, owned, rarityColor) {
-  const ownBadge   = owned  ? `<span class="comp-badge comp-owned">✅ 보유 중</span>` : '';
-  const lvBadge    = petId  ? `<span class="comp-badge comp-cap">🎯 Lv.1 포획</span>` : '';
+function compCard(petId, emoji, name, type, rarity, habitat, desc, owned, rarityColor, img) {
+  const rarCls   = rarityPortraitClass(rarity);
+  const portrait = img
+    ? `<img src="${img}" class="comp-sprite" alt="${name}">`
+    : `<div class="comp-portrait portrait-${rarCls}"><div class="portrait-emoji">${emoji}</div></div>`;
+  const ownBadge = owned ? `<span class="comp-badge comp-owned">✅ 보유 중</span>` : '';
+  const lvBadge  = petId ? `<span class="comp-badge comp-cap">🎯 Lv.1 포획</span>` : '';
   return `<div class="comp-card">
-    <div class="comp-emoji">${emoji}</div>
+    ${portrait}
     <div class="comp-info">
       <div class="comp-name" style="color:${rarityColor[rarity]||'#aaa'}">${name} <span class="comp-rarity">[${rarity}]</span></div>
       <div class="comp-type">${type} · ${habitat}</div>
@@ -807,9 +900,19 @@ function compCard(petId, emoji, name, type, rarity, habitat, desc, owned, rarity
 }
 
 // ── Developer Mode ────────────────────────────────────────────────────────────
+const DEV = { forceLv1: false };
+
 function toggleDevPanel() {
   const panel = document.getElementById('dev-panel');
   panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+}
+
+function devToggleForceLv1() {
+  DEV.forceLv1 = !DEV.forceLv1;
+  const btn = document.getElementById('dev-lv1-btn');
+  btn.textContent = `Lv.1 확률 50%: ${DEV.forceLv1 ? 'ON' : 'OFF'}`;
+  btn.style.background = DEV.forceLv1 ? '#334433' : '';
+  addMapLog(`🔧 DEV: Lv.1 강제 50% ${DEV.forceLv1 ? 'ON' : 'OFF'}`);
 }
 
 function devGoto(mapId) {
@@ -818,6 +921,30 @@ function devGoto(mapId) {
   addMapLog(`🔧 DEV: ${MAPS[mapId].name}으로 이동`);
   document.getElementById('dev-panel').style.display = 'none';
   updateHUD();
+}
+
+function devLevelUpPlayer() {
+  Player.level++;
+  Player.expToNext = calcExpToNext(Player.level);
+  Player.exp = 0;
+  Player.statPoints += 4;
+  Player.currentHp = getPlayerUIStats().maxHp;
+  updateHUD();
+  saveGame();
+  addMapLog(`🔧 DEV: 캐릭터 → Lv.${Player.level} (SP +4)`);
+}
+
+function devLevelUpAllPets() {
+  G.party.forEach(p => {
+    levelUp(p);
+    p.currentHp = getUIStats(p).hp;
+    p.expToNext = calcExpToNext(p.level);
+    p.exp = 0;
+  });
+  updateHUD();
+  if (document.getElementById('side-pet').classList.contains('open')) renderPetPanel();
+  saveGame();
+  addMapLog(`🔧 DEV: 파티 페트 전원 레벨업 → ${G.party.map(p => `${p.name} Lv.${p.level}`).join(', ')}`);
 }
 
 // ── Keyboard Input ────────────────────────────────────────────────────────────

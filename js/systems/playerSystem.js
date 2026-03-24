@@ -52,17 +52,18 @@ function playerGainExp(amount) {
 
 // ── Stat Allocation ───────────────────────────────────────────────────────────
 // HP +1 계수 → UI maxHp +4, ATK/DEF/SPD +1 계수 → UI 스탯 +1
-function playerAllocateStat(stat) {
-  if (Player.statPoints <= 0) return false;
+function playerAllocateStat(stat, amount = 1) {
+  const spend = Math.min(amount, Player.statPoints);
+  if (spend <= 0) return false;
   const prevStats = getPlayerUIStats();
   switch (stat) {
-    case 'hp':  Player.hp  += 1; break;
-    case 'atk': Player.atk += 1; break;
-    case 'def': Player.def += 1; break;
-    case 'spd': Player.spd += 1; break;
+    case 'hp':  Player.hp  += spend; break;
+    case 'atk': Player.atk += spend; break;
+    case 'def': Player.def += spend; break;
+    case 'spd': Player.spd += spend; break;
     default: return false;
   }
-  Player.statPoints--;
+  Player.statPoints -= spend;
 
   // HP를 올렸을 때 현재 HP도 동일하게 증가 (단, 새 maxHp 이하로 캡)
   const newStats = getPlayerUIStats();

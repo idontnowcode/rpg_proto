@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>RPG Proto</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -53,6 +53,10 @@
           <button class="alloc-btn" onclick="allocateStat('atk')">ATK +1</button>
           <button class="alloc-btn" onclick="allocateStat('def')">DEF +1</button>
           <button class="alloc-btn" onclick="allocateStat('spd')">SPD +1</button>
+          <button class="alloc-btn alloc-btn-10" onclick="allocateStat('hp',10)">HP ×10</button>
+          <button class="alloc-btn alloc-btn-10" onclick="allocateStat('atk',10)">ATK ×10</button>
+          <button class="alloc-btn alloc-btn-10" onclick="allocateStat('def',10)">DEF ×10</button>
+          <button class="alloc-btn alloc-btn-10" onclick="allocateStat('spd',10)">SPD ×10</button>
         </div>
       </div>
     </div>
@@ -106,14 +110,7 @@
         <span id="hud-player-exp" class="hud-exp">EXP 0/30</span>
         <button id="hud-sp" onclick="togglePanel('stat')">SP: 0</button>
       </div>
-      <div class="hud-row">
-        <span id="hud-name">🐾 - Lv.1</span>
-        <span id="hud-hp"  class="hud-hp" >HP -</span>
-        <span id="hud-atk" class="hud-atk">ATK -</span>
-        <span id="hud-def" class="hud-def">DEF -</span>
-        <span id="hud-spd" class="hud-spd">SPD -</span>
-        <span id="hud-exp" class="hud-exp">EXP 0/0</span>
-      </div>
+      <div id="hud-party"></div>
       <div class="hud-row hud-status">
         <span id="hud-gold">💰 0G</span>
         <button onclick="togglePanel('pet')">📦 <span id="hud-pet-count">1/10</span></button>
@@ -136,10 +133,18 @@
     <div id="dev-panel" style="display:none">
       <span class="dev-label">🔧 DEV 맵 이동</span>
       <button onclick="devGoto('town')">🏘️ 마을</button>
-      <button onclick="devGoto('dungeon')">⚔️ 던전</button>
-      <button onclick="devGoto('forest')">🌲 숲</button>
-      <button onclick="devGoto('cave')">🕳️ 동굴</button>
-      <button onclick="devGoto('darkCastle')">🏰 암흑성</button>
+      <button onclick="devGoto('dungeon')">⚔️ T1</button>
+      <button onclick="devGoto('forest')">🌲 T2</button>
+      <button onclick="devGoto('cave')">🕳️ T3</button>
+      <button onclick="devGoto('darkForest')">🌑 T4</button>
+      <button onclick="devGoto('abyss')">🌀 T5</button>
+      <button onclick="devGoto('shadowRealm')">👁️ T6</button>
+      <button onclick="devGoto('darkCastle')">🏰 T7</button>
+      <span class="dev-label">⬆️ DEV Lv Up</span>
+      <button onclick="devLevelUpPlayer()">🧑 캐릭터</button>
+      <button onclick="devLevelUpAllPets()">🐾 파티 전체</button>
+      <span class="dev-label">🎲 DEV 포획</span>
+      <button id="dev-lv1-btn" onclick="devToggleForceLv1()">Lv.1 확률 50%: OFF</button>
     </div>
 
     <!-- D-Pad -->
@@ -158,13 +163,16 @@
 
   <div id="scene-battle" class="scene">
 
-    <!-- Pixel art battle background -->
-    <canvas id="battle-canvas" width="480" height="200" style="width:100%;image-rendering:pixelated;display:block;max-height:200px;"></canvas>
+    <!-- Battle Arena Header -->
+    <div id="battle-arena-header">
+      <span id="battle-arena-title">⚔️ BATTLE</span>
+      <span id="battle-arena-turn"></span>
+    </div>
 
     <!-- Enemy cards: dynamically rendered, click to select target -->
     <div id="battle-enemies"></div>
 
-    <div class="vs-divider">⚔ VS ⚔</div>
+    <div class="vs-divider">— VS —</div>
 
     <!-- Ally: player + party (rendered dynamically by renderBattle) -->
     <div id="battle-allies"></div>
@@ -204,7 +212,6 @@
   <script src="js/systems/petFactory.js"></script>
   <script src="js/systems/combatSystem.js"></script>
   <script src="js/systems/playerSystem.js"></script>
-  <script src="js/systems/battleCanvas.js"></script>
   <script src="js/main.js"></script>
 
 </body>

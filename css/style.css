@@ -130,6 +130,8 @@ body {
   color: #ccc; padding: 6px 4px; font-size: 0.8rem; cursor: pointer;
 }
 .alloc-btn:hover { background: #2a3a80; }
+.alloc-btn-10 { background: #2a1a4a; border-color: #7755aa; color: #bb99ff; }
+.alloc-btn-10:hover { background: #3a2a60; }
 
 /* Pet list items */
 #pet-list { display: flex; flex-direction: column; gap: 5px; }
@@ -141,6 +143,7 @@ body {
 .pet-item-info { display: flex; flex-direction: column; gap: 2px; }
 .pet-item-info strong { color: #ddd; font-size: 0.82rem; }
 .pet-item-info span   { color: #777; font-size: 0.73rem; }
+.pet-growth { color: #5588aa !important; font-size: 0.70rem !important; }
 .pet-item-actions { display: flex; gap: 4px; flex-wrap: wrap; }
 .pet-item-actions button {
   background: #222244; border: 1px solid #4455aa; border-radius: 5px;
@@ -240,6 +243,8 @@ body {
 .hud-def { color: #66aaff; }
 .hud-spd { color: #ffee66; }
 .hud-exp { color: #cc88ff; }
+.hud-growth-row { padding-top: 0; margin-top: -3px; }
+.hud-growth { color: #5588aa; font-size: 0.70rem; }
 
 #hud-sp {
   margin-left: auto; background: #1a1a38; border: 1px solid #444; border-radius: 5px;
@@ -300,6 +305,16 @@ body {
 ══════════════════════════════════════════════ */
 #scene-battle { gap: 8px; padding: 10px 10px 14px; }
 
+/* ── Battle Arena Header ───────────────────────────────────────────── */
+#battle-arena-header {
+  width: 100%; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, #0a0a1a 0%, #111128 100%);
+  border: 1px solid #222244; border-radius: 10px;
+  padding: 8px 12px; gap: 8px; min-height: 52px;
+}
+#battle-arena-title { font-size: 0.8rem; color: #8888cc; letter-spacing: 2px; }
+#battle-arena-turn  { font-size: 0.72rem; color: #ffcc66; margin-left: auto; }
+
 /* Enemy row */
 #battle-enemies {
   display: flex; gap: 8px; width: 100%;
@@ -307,42 +322,107 @@ body {
 }
 
 .enemy-card {
-  flex: 1; min-width: 110px; max-width: 190px;
-  background: #18111a; border: 2px solid #552233;
-  border-radius: 10px; padding: 9px 10px; cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  flex: 1; min-width: 120px; max-width: 200px;
+  background: #110d1a; border: 2px solid #442233;
+  border-radius: 12px; padding: 0; cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  overflow: hidden;
 }
-.enemy-card:hover:not(.defeated) { border-color: #884455; }
-.enemy-card.defeated  { opacity: 0.3; filter: grayscale(1); cursor: default; }
-.enemy-card.capturable { border-color: #886600; box-shadow: 0 0 6px #ffcc0044; }
-.enemy-card.targeted {
-  border-color: #ff4466;
-  box-shadow: 0 0 10px #ff446688;
+.enemy-card:hover:not(.defeated) { border-color: #774455; transform: translateY(-2px); }
+.enemy-card.defeated  { opacity: 0.25; filter: grayscale(1) brightness(0.6); cursor: default; transform: none; }
+.enemy-card.capturable { border-color: #886600; box-shadow: 0 0 8px #ffcc0033; }
+.enemy-card.targeted   { border-color: #ff4466; box-shadow: 0 0 14px #ff446666; }
+.enemy-card.capturable.targeted { border-color: #ffcc00; box-shadow: 0 0 16px #ffcc0077; }
+.enemy-card.hit-flash  { animation: hitFlash 0.3s ease; }
+.ally-card.hit-flash   { animation: hitFlashAlly 0.3s ease; }
+
+@keyframes hitFlash     { 0%{background:#3a1111} 50%{background:#661122} 100%{background:#110d1a} }
+@keyframes hitFlashAlly { 0%{background:#111133} 50%{background:#222266} 100%{background:#0d1120} }
+@keyframes blink        { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes float        { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+/* Portrait — shown at top of each combatant card */
+.portrait-area {
+  width: 100%; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; border-radius: 10px 10px 0 0;
+  font-size: 2.8rem; user-select: none;
+  overflow: hidden;
 }
-.enemy-card.capturable.targeted { border-color: #ffcc00; box-shadow: 0 0 12px #ffcc0088; }
+.portrait-area::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 120%, rgba(255,255,255,0.06) 0%, transparent 70%);
+}
+.portrait-common  { background: linear-gradient(160deg, #1a2030 0%, #252840 100%); }
+.portrait-uncommon{ background: linear-gradient(160deg, #102030 0%, #153048 100%); border-top: 2px solid #336688; }
+.portrait-rare    { background: linear-gradient(160deg, #182048 0%, #2a3470 100%); border-top: 2px solid #4466cc; }
+.portrait-epic    { background: linear-gradient(160deg, #241040 0%, #402060 100%); border-top: 2px solid #8844cc; }
+.portrait-legend  { background: linear-gradient(160deg, #301020 0%, #602040 100%); border-top: 2px solid #cc4488; box-shadow: inset 0 -4px 16px #cc448822; }
+.portrait-myth    { background: linear-gradient(160deg, #302010 0%, #604020 100%); border-top: 2px solid #ffcc44; box-shadow: inset 0 -4px 20px #ffcc4433; }
+.portrait-player  { background: linear-gradient(160deg, #103040 0%, #205060 100%); border-top: 2px solid #44aacc; }
+.portrait-pet     { background: linear-gradient(160deg, #101838 0%, #1a2855 100%); border-top: 2px solid #5577bb; }
+
+/* Rarity badge in portrait */
+.portrait-rarity {
+  position: absolute; top: 4px; right: 6px;
+  font-size: 0.58rem; padding: 1px 5px; border-radius: 6px;
+  font-weight: bold; letter-spacing: 0.5px;
+}
+.rarity-일반  { background: #333a4a; color: #9aa; }
+.rarity-희귀  { background: #1a3060; color: #66aaff; }
+.rarity-전설  { background: #40103a; color: #dd66ff; }
+.rarity-신화  { background: #402000; color: #ffcc44; }
+.rarity-레어  { background: #2a2040; color: #aa88ff; }
+
+/* Portrait floating emoji */
+.portrait-emoji { position: relative; z-index: 1; animation: float 3s ease-in-out infinite; line-height: 1; }
+.enemy-card.defeated .portrait-emoji { animation: none; filter: grayscale(1); }
+
+/* Battle sprite image (replaces emoji when img is set) */
+.battle-sprite {
+  width: 56px; height: 56px;
+  image-rendering: pixelated; object-fit: contain;
+  position: relative; z-index: 1;
+}
+
+/* Level badge in portrait */
+.portrait-lv {
+  position: absolute; bottom: 4px; left: 6px;
+  font-size: 0.6rem; color: #ccc; background: rgba(0,0,0,0.55);
+  padding: 1px 5px; border-radius: 6px;
+}
+/* Capturable sparkle */
+.portrait-capturable {
+  position: absolute; bottom: 4px; right: 6px;
+  font-size: 0.72rem; animation: blink 1.2s step-end infinite;
+}
+
+/* Card body below portrait */
+.card-body { padding: 6px 8px 7px; }
+.combatant-name { font-size: 0.82rem; font-weight: bold; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.combatant-hp   { font-size: 0.70rem; color: #999; margin-top: 2px; }
 
 .target-indicator {
-  font-size: 0.72rem; color: #ff4466; text-align: center; margin-top: 2px;
+  font-size: 0.68rem; color: #ff4466; text-align: center; margin-top: 2px;
   animation: blink 0.8s step-end infinite;
 }
 .enemy-card.capturable.targeted .target-indicator { color: #ffcc00; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-.combatant { background: #111128; border: 1px solid #2a2a55; border-radius: 10px; padding: 9px 10px; }
-.combatant-name { font-size: 0.86rem; font-weight: bold; margin-bottom: 3px; }
-.combatant-hp   { font-size: 0.76rem; color: #999; margin-top: 2px; }
+/* Ally cards */
+.combatant {
+  background: #0d1120; border: 1px solid #2a2a55;
+  border-radius: 12px; overflow: hidden;
+}
 
 .vs-divider { color: #f0c060; font-weight: bold; font-size: 0.85rem; letter-spacing: 4px; }
 
-#battle-allies { display: flex; gap: 10px; width: 100%; }
-#ally-player { flex: 1; border-color: #224422; }
-#ally-pet    { flex: 1; border-color: #222244; }
+#battle-allies { display: flex; gap: 8px; width: 100%; }
 
 .hp-bar-bg { background: #1a1a2e; border-radius: 4px; height: 7px; overflow: hidden; margin: 4px 0; }
 .hp-bar    { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
-.monster-bar   { background: #cc3333; width: 100%; }
-.player-bar    { background: #33cc55; width: 100%; }
-.player-bar-pet { background: #5599ff; width: 100%; }
+.monster-bar   { background: linear-gradient(90deg, #aa2222, #ee4444); width: 100%; }
+.player-bar    { background: linear-gradient(90deg, #22aa44, #44ee77); width: 100%; }
+.player-bar-pet { background: linear-gradient(90deg, #2255cc, #4499ff); width: 100%; }
 
 #battle-log {
   width: 100%; background: #0a0a18; border: 1px solid #2a2a55; border-radius: 8px;
@@ -395,7 +475,16 @@ body {
   display: flex; gap: 10px; align-items: flex-start;
   background: #1a1a38; border: 1px solid #2a2a55; border-radius: 8px; padding: 8px 10px;
 }
-.comp-emoji { font-size: 2rem; min-width: 36px; text-align: center; }
+.comp-portrait {
+  width: 72px; height: 72px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.4rem;
+}
+.comp-sprite {
+  width: 72px; height: 72px; border-radius: 10px; flex-shrink: 0;
+  image-rendering: pixelated; object-fit: contain;
+  background: #1a1a2e;
+}
 .comp-info { flex: 1; }
 .comp-name { font-size: 0.88rem; font-weight: bold; }
 .comp-rarity { font-size: 0.70rem; font-weight: normal; }
@@ -472,16 +561,18 @@ body {
 
   /* ── Battle Scene ── */
   #scene-battle { padding: 6px 6px 10px; gap: 6px; }
-  #battle-canvas { max-height: 160px; }
+  #battle-arena-header { min-height: 38px; padding: 5px 8px; }
+  #battle-arena-title { font-size: 0.72rem; }
 
-  .enemy-card { min-width: 90px; padding: 7px 8px; }
-  .combatant { padding: 6px 8px; }
-  .combatant-name { font-size: 0.78rem; }
-  .combatant-hp   { font-size: 0.70rem; }
+  .enemy-card { min-width: 90px; }
+  .portrait-area { height: 64px; font-size: 2.2rem; }
+  .card-body { padding: 5px 7px 6px; }
+  .combatant-name { font-size: 0.76rem; }
+  .combatant-hp   { font-size: 0.66rem; }
 
   /* 4-card ally row wraps cleanly */
   #battle-allies { flex-wrap: wrap; gap: 6px; }
-  #battle-allies .combatant { flex: 1 1 calc(50% - 6px); min-width: 110px; }
+  #battle-allies .combatant { flex: 1 1 calc(50% - 6px); min-width: 100px; }
 
   #battle-log { height: 80px; font-size: 0.72rem; padding: 6px 8px; }
 
