@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 독 벌레 (Poison Bug) — segmented centipede -->
+  <!-- Head -->
+  <g fill="#556600">
+    <rect x="4"  y="4"  width="10" height="8"/>
+  </g>
+  <!-- Mandibles / poison stingers -->
+  <g fill="#AA00AA">
+    <rect x="2"  y="6"  width="2"  height="4"/>
+    <rect x="0"  y="8"  width="2"  height="2"/>
+  </g>
+  <!-- Antennae -->
+  <g fill="#336600">
+    <rect x="4"  y="2"  width="2"  height="4"/>
+    <rect x="10" y="2"  width="2"  height="4"/>
+    <rect x="2"  y="0"  width="4"  height="2"/>
+    <rect x="10" y="0"  width="4"  height="2"/>
+  </g>
+  <!-- Eyes -->
+  <g fill="#AAFF00">
+    <rect x="4"  y="6"  width="2"  height="2"/>
+    <rect x="8"  y="6"  width="2"  height="2"/>
+  </g>
+  <!-- Body segments: yellow-green -->
+  <g fill="#88AA22">
+    <rect x="12" y="6"  width="6"  height="6"/>
+    <rect x="18" y="8"  width="6"  height="6"/>
+    <rect x="20" y="12" width="6"  height="4"/>
+    <rect x="22" y="14" width="6"  height="4"/>
+    <rect x="24" y="16" width="6"  height="4"/>
+  </g>
+  <!-- Segment dividers -->
+  <g fill="#556600">
+    <rect x="18" y="6"  width="2"  height="6"/>
+    <rect x="24" y="8"  width="2"  height="6"/>
+  </g>
+  <!-- Legs (4 pairs) -->
+  <g fill="#334400">
+    <rect x="12" y="12" width="2"  height="4"/>
+    <rect x="14" y="14" width="2"  height="4"/>
+    <rect x="18" y="14" width="2"  height="4"/>
+    <rect x="20" y="14" width="2"  height="2"/>
+    <rect x="22" y="18" width="2"  height="4"/>
+    <rect x="24" y="20" width="2"  height="4"/>
+  </g>
+  <!-- Poison drip -->
+  <g fill="#CC00CC">
+    <rect x="0"  y="10" width="2"  height="4"/>
+    <rect x="0"  y="14" width="2"  height="2"/>
+  </g>
+</svg>

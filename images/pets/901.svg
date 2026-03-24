@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 붉은 쥐 — rat base, red variant -->
+  <g fill="#882200">
+    <rect x="6"  y="2"  width="2" height="2"/>
+    <rect x="22" y="2"  width="2" height="2"/>
+    <rect x="4"  y="4"  width="2" height="2"/>
+    <rect x="8"  y="4"  width="2" height="2"/>
+    <rect x="20" y="4"  width="2" height="2"/>
+    <rect x="24" y="4"  width="2" height="2"/>
+    <rect x="4"  y="6"  width="2" height="2"/>
+    <rect x="8"  y="6"  width="2" height="2"/>
+    <rect x="20" y="6"  width="2" height="2"/>
+    <rect x="24" y="6"  width="2" height="2"/>
+    <rect x="26" y="22" width="2" height="2"/>
+    <rect x="28" y="24" width="2" height="2"/>
+    <rect x="30" y="26" width="2" height="6"/>
+  </g>
+  <g fill="#E8A080">
+    <rect x="6"  y="4"  width="2" height="4"/>
+    <rect x="22" y="4"  width="2" height="4"/>
+  </g>
+  <g fill="#CC5520">
+    <rect x="6"  y="8"  width="16" height="2"/>
+    <rect x="4"  y="10" width="20" height="2"/>
+    <rect x="4"  y="12" width="4"  height="2"/>
+    <rect x="10" y="12" width="8"  height="2"/>
+    <rect x="20" y="12" width="4"  height="2"/>
+    <rect x="4"  y="14" width="20" height="2"/>
+    <rect x="2"  y="16" width="24" height="6"/>
+    <rect x="2"  y="22" width="24" height="2"/>
+    <rect x="4"  y="24" width="4"  height="2"/>
+    <rect x="10" y="24" width="10" height="2"/>
+    <rect x="22" y="24" width="2"  height="2"/>
+    <rect x="4"  y="26" width="2"  height="2"/>
+    <rect x="10" y="26" width="10" height="2"/>
+  </g>
+  <g fill="#FFAA00">
+    <rect x="8"  y="12" width="2" height="2"/>
+    <rect x="18" y="12" width="2" height="2"/>
+  </g>
+</svg>

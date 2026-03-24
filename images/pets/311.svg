@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 불여우 (Fire Fox) — front-face portrait, pointed ears -->
+  <!-- Pointed ear tips -->
+  <g fill="#882200">
+    <rect x="8"  y="0"  width="2"  height="2"/>
+    <rect x="22" y="0"  width="2"  height="2"/>
+    <rect x="6"  y="2"  width="6"  height="2"/>
+    <rect x="20" y="2"  width="6"  height="2"/>
+    <rect x="4"  y="4"  width="26" height="2"/>
+    <rect x="4"  y="14" width="26" height="2"/>
+    <rect x="4"  y="6"  width="2"  height="8"/>
+    <rect x="26" y="6"  width="2"  height="8"/>
+    <rect x="14" y="12" width="4"  height="2"/>
+  </g>
+  <!-- Inner ear (lighter orange) -->
+  <g fill="#FFBB88">
+    <rect x="8"  y="2"  width="2"  height="2"/>
+    <rect x="22" y="2"  width="2"  height="2"/>
+  </g>
+  <!-- Body fur: fire orange -->
+  <g fill="#CC4411">
+    <rect x="6"  y="4"  width="20" height="10"/>
+    <rect x="8"  y="16" width="16" height="4"/>
+  </g>
+  <!-- Muzzle: lighter -->
+  <g fill="#FF8844">
+    <rect x="10" y="10" width="12" height="4"/>
+  </g>
+  <!-- Flame eyes: amber -->
+  <g fill="#FFDD00">
+    <rect x="8"  y="8"  width="4"  height="4"/>
+    <rect x="20" y="8"  width="4"  height="4"/>
+  </g>
+  <g fill="#CC7700">
+    <rect x="10" y="10" width="2"  height="2"/>
+    <rect x="22" y="10" width="2"  height="2"/>
+  </g>
+  <!-- Cheek whisker marks -->
+  <g fill="#FF6622">
+    <rect x="6"  y="12" width="4"  height="2"/>
+    <rect x="22" y="12" width="4"  height="2"/>
+  </g>
+</svg>

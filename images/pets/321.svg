@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 회색 늑대 (Grey Wolf) — front-face portrait -->
+  <!-- Dark outline/fur -->
+  <g fill="#665544">
+    <rect x="6"  y="0"  width="6"  height="4"/><!-- left ear -->
+    <rect x="20" y="0"  width="6"  height="4"/><!-- right ear -->
+    <rect x="4"  y="4"  width="24" height="2"/><!-- head top -->
+    <rect x="4"  y="14" width="24" height="2"/><!-- head bottom -->
+    <rect x="4"  y="6"  width="2"  height="8"/><!-- head left -->
+    <rect x="26" y="6"  width="2"  height="8"/><!-- head right -->
+    <rect x="14" y="12" width="4"  height="2"/><!-- nose -->
+  </g>
+  <!-- Inner ear -->
+  <g fill="#DDBBAA">
+    <rect x="8"  y="0"  width="2"  height="4"/>
+    <rect x="22" y="0"  width="2"  height="4"/>
+  </g>
+  <!-- Main head fur: grey -->
+  <g fill="#999988">
+    <rect x="6"  y="4"  width="20" height="10"/>
+    <rect x="8"  y="16" width="16" height="6"/><!-- chest -->
+  </g>
+  <!-- Muzzle: lighter grey -->
+  <g fill="#CCBBAA">
+    <rect x="10" y="10" width="12" height="4"/>
+  </g>
+  <!-- Eyes: amber -->
+  <g fill="#BBAA00">
+    <rect x="8"  y="8"  width="4"  height="4"/>
+    <rect x="20" y="8"  width="4"  height="4"/>
+  </g>
+  <g fill="#665500">
+    <rect x="10" y="10" width="2"  height="2"/>
+    <rect x="22" y="10" width="2"  height="2"/>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 이그니스 (Fire Blob) — 16×16 pixel art -->
+  <!-- Bright yellow flame tips -->
+  <g fill="#FFDD00">
+    <rect x="10" y="2"  width="2" height="2"/><!-- row1 c5 -->
+    <rect x="18" y="2"  width="2" height="2"/><!-- row1 c9 -->
+    <rect x="8"  y="4"  width="4" height="2"/><!-- row2 c4,5 -->
+    <rect x="16" y="4"  width="4" height="2"/><!-- row2 c8,9 -->
+    <rect x="6"  y="6"  width="2" height="2"/><!-- row3 c3 -->
+    <rect x="10" y="6"  width="2" height="2"/><!-- row3 c5 -->
+    <rect x="16" y="6"  width="2" height="2"/><!-- row3 c8 -->
+    <rect x="20" y="6"  width="2" height="2"/><!-- row3 c10 -->
+    <rect x="12" y="12" width="4" height="2"/><!-- row6 glowing eyes c6,7 -->
+    <rect x="10" y="14" width="8" height="2"/><!-- row7 bright core c5-8 -->
+  </g>
+  <!-- Light orange highlight -->
+  <g fill="#FF9900">
+    <rect x="8"  y="6"  width="2" height="2"/><!-- row3 c4 -->
+    <rect x="18" y="6"  width="2" height="2"/><!-- row3 c9 -->
+    <rect x="10" y="8"  width="2" height="2"/><!-- row4 c5 -->
+    <rect x="16" y="8"  width="2" height="2"/><!-- row4 c8 -->
+    <rect x="6"  y="12" width="2" height="2"/><!-- row6 c3 -->
+    <rect x="20" y="12" width="2" height="2"/><!-- row6 c10 -->
+  </g>
+  <!-- Orange body -->
+  <g fill="#FF7700">
+    <!-- Row 4: cols 3,4 + 6,7 + 9,10 -->
+    <rect x="6"  y="8"  width="4" height="2"/>
+    <rect x="12" y="8"  width="4" height="2"/>
+    <rect x="18" y="8"  width="4" height="2"/>
+    <!-- Row 5: cols 2-11 -->
+    <rect x="4"  y="10" width="20" height="2"/>
+    <!-- Row 6: cols 2 + 4,5 + 8,9 + 11 -->
+    <rect x="4"  y="12" width="2"  height="2"/>
+    <rect x="8"  y="12" width="4"  height="2"/>
+    <rect x="16" y="12" width="4"  height="2"/>
+    <rect x="22" y="12" width="2"  height="2"/>
+    <!-- Row 7: cols 2,3,4 + 9,10,11 -->
+    <rect x="4"  y="14" width="6"  height="2"/>
+    <rect x="18" y="14" width="6"  height="2"/>
+    <!-- Row 8: cols 2-11 -->
+    <rect x="4"  y="16" width="20" height="2"/>
+    <!-- Row 9: cols 2 + 5,6,7,8 + 11 -->
+    <rect x="4"  y="18" width="2"  height="2"/>
+    <rect x="10" y="18" width="8"  height="2"/>
+    <rect x="22" y="18" width="2"  height="2"/>
+    <!-- Row 10: cols 6,7 (orange center) -->
+    <rect x="12" y="20" width="4"  height="2"/>
+  </g>
+  <!-- Dark red base / underbelly -->
+  <g fill="#FF2200">
+    <!-- Row 9: cols 3,4 + 9,10 -->
+    <rect x="6"  y="18" width="4" height="2"/>
+    <rect x="18" y="18" width="4" height="2"/>
+    <!-- Row 10: cols 3,4,5 + 8,9,10 -->
+    <rect x="6"  y="20" width="6" height="2"/>
+    <rect x="16" y="20" width="6" height="2"/>
+    <!-- Row 11: cols 4-9 -->
+    <rect x="8"  y="22" width="12" height="2"/>
+  </g>
+</svg>

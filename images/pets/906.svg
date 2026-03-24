@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 검은 슬라임 (Black Slime) — 16×16 pixel art -->
+  <!-- Highlight (subtle purple sheen) -->
+  <g fill="#442255">
+    <rect x="10" y="2"  width="8"  height="2"/>
+    <rect x="8"  y="4"  width="4"  height="2"/>
+  </g>
+  <!-- Body: near-black -->
+  <g fill="#1A1030">
+    <rect x="8"  y="2"  width="16" height="2"/>
+    <rect x="6"  y="4"  width="20" height="4"/>
+    <rect x="4"  y="8"  width="24" height="8"/>
+    <rect x="6"  y="16" width="20" height="2"/>
+    <rect x="8"  y="18" width="16" height="2"/>
+    <rect x="10" y="20" width="12" height="2"/>
+  </g>
+  <g fill="#0A0820">
+    <rect x="10" y="22" width="12" height="2"/>
+    <rect x="6"  y="20" width="4"  height="2"/>
+    <rect x="22" y="20" width="4"  height="2"/>
+  </g>
+  <!-- Purple glowing eyes -->
+  <g fill="#CC44FF">
+    <rect x="8"  y="8"  width="4"  height="4"/>
+    <rect x="20" y="8"  width="4"  height="4"/>
+  </g>
+  <g fill="#880099">
+    <rect x="10" y="10" width="2"  height="2"/>
+    <rect x="22" y="10" width="2"  height="2"/>
+  </g>
+  <!-- Toxic purple veins -->
+  <g fill="#882299">
+    <rect x="6"  y="12" width="2"  height="2"/>
+    <rect x="24" y="12" width="2"  height="2"/>
+    <rect x="14" y="16" width="4"  height="2"/>
+  </g>
+</svg>

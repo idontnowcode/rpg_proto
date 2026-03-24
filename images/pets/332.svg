@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 덩굴 괴물 (Vine Monster) — plant humanoid -->
+  <!-- Leaf crown -->
+  <g fill="#228833">
+    <rect x="4"  y="0"  width="6"  height="4"/>
+    <rect x="22" y="0"  width="6"  height="4"/>
+    <rect x="10" y="0"  width="12" height="2"/>
+  </g>
+  <!-- Body: dark vine -->
+  <g fill="#1A5511">
+    <rect x="10" y="2"  width="12" height="2"/>
+    <rect x="8"  y="4"  width="16" height="4"/><!-- head -->
+    <rect x="10" y="8"  width="12" height="2"/><!-- neck -->
+    <rect x="6"  y="10" width="20" height="8"/><!-- torso -->
+    <rect x="4"  y="12" width="4"  height="8"/><!-- left arm -->
+    <rect x="24" y="12" width="4"  height="8"/><!-- right arm -->
+    <rect x="8"  y="18" width="6"  height="8"/><!-- left leg -->
+    <rect x="18" y="18" width="6"  height="8"/><!-- right leg -->
+  </g>
+  <!-- Vine highlights (lighter green) -->
+  <g fill="#33AA44">
+    <rect x="8"  y="4"  width="4"  height="2"/>
+    <rect x="20" y="4"  width="4"  height="2"/>
+    <rect x="8"  y="10" width="2"  height="6"/>
+    <rect x="22" y="10" width="2"  height="6"/>
+  </g>
+  <!-- Glowing eyes -->
+  <g fill="#AAFF44">
+    <rect x="10" y="6"  width="4"  height="2"/>
+    <rect x="18" y="6"  width="4"  height="2"/>
+  </g>
+  <!-- Thorns on arms -->
+  <g fill="#AA4400">
+    <rect x="2"  y="14" width="2"  height="2"/>
+    <rect x="28" y="14" width="2"  height="2"/>
+    <rect x="2"  y="18" width="2"  height="2"/>
+    <rect x="28" y="18" width="2"  height="2"/>
+  </g>
+  <!-- Leaf hands -->
+  <g fill="#44BB22">
+    <rect x="2"  y="20" width="4"  height="2"/>
+    <rect x="26" y="20" width="4"  height="2"/>
+  </g>
+</svg>

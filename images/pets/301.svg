@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <!-- 붉은 거북 (Red Turtle) — front view -->
+  <!-- Head and neck -->
+  <g fill="#886644">
+    <rect x="12" y="2"  width="8"  height="6"/>
+    <rect x="12" y="8"  width="8"  height="2"/>
+  </g>
+  <!-- Eyes -->
+  <g fill="#FFAA00">
+    <rect x="12" y="4"  width="2"  height="2"/>
+    <rect x="18" y="4"  width="2"  height="2"/>
+  </g>
+  <!-- Shell outline -->
+  <g fill="#882200">
+    <rect x="6"  y="8"  width="20" height="2"/>
+    <rect x="4"  y="10" width="24" height="12"/>
+    <rect x="6"  y="22" width="20" height="2"/>
+    <!-- Shell ridges -->
+    <rect x="14" y="8"  width="4"  height="16"/>
+    <rect x="4"  y="15" width="24" height="2"/>
+  </g>
+  <!-- Shell plates -->
+  <g fill="#AA4422">
+    <rect x="6"  y="10" width="8"  height="5"/>
+    <rect x="18" y="10" width="8"  height="5"/>
+    <rect x="6"  y="17" width="8"  height="5"/>
+    <rect x="18" y="17" width="8"  height="5"/>
+  </g>
+  <!-- Legs -->
+  <g fill="#886644">
+    <rect x="2"  y="12" width="4"  height="6"/>
+    <rect x="26" y="12" width="4"  height="6"/>
+    <rect x="6"  y="22" width="6"  height="4"/>
+    <rect x="20" y="22" width="6"  height="4"/>
+  </g>
+</svg>
